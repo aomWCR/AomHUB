@@ -9,6 +9,7 @@ local library = {count = 0, queue = {}, callbacks = {}, rainbowtable = {} , togg
 	MusicSet = {};
 	ID = {
 		["oki doki boomer"] = 4932456113;
+		["Day n Nite"] = 2371543268;
 		["เขาไม่รักก็ทักมา"] = 4839436924;
 		["อัศวินรัตติกาล"] = 5582001376;
 		["เบิ้ลหาพ่อง"] = 4445502045;
@@ -18,6 +19,7 @@ local library = {count = 0, queue = {}, callbacks = {}, rainbowtable = {} , togg
 	};
 	Name = {
 		"oki doki boomer";
+		"Day n Nite";
 		"เขาไม่รักก็ทักมา";
 		"อัศวินรัตติกาล";
 		"เบิ้ลหาพ่อง";
