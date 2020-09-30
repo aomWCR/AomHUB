@@ -126,6 +126,7 @@ function massFire(args, aura)
 						
 						if ((skill_deb[mob] and not skill_deb[mob][method]) or skill_deb[mob] == nil) then
 							Event:FireServer('Skills',{'UseSkill',method,{Direction=Vector3.new(0,0,0)}});
+							Event:FireServer('Skills',{'UseSkill',method,{Direction=Vector3.new(0,5,0)}});
 							coroutine.wrap(applySkillDebounce)(mob, method)
 						end
 						args[3][4] = genKey()
