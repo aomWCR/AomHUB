@@ -1306,8 +1306,10 @@ local defaults; do
 			for _, obj in next, library.rainbowtable do
 				if Music.Playing == true then
 					obj.BackgroundColor3 = Color3.fromHSV(hue/360,1,math.clamp(Music.PlaybackLoudness/475,0,1))
+					game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("CardinalUI"):FindFirstChild("ServerVersion").TextColor3 = Color3.fromHSV(hue/360,1,math.clamp(Music.PlaybackLoudness/475,0,1))
 				else
 					obj.BackgroundColor3 = Color3.fromHSV(hue/360,1,math.clamp(1,0,1))
+					game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("CardinalUI"):FindFirstChild("ServerVersion").TextColor3 = Color3.fromHSV(hue/360,1,math.clamp(1,0,1))
 				end
 			end
 			ToggleValue = library.AuraSet
