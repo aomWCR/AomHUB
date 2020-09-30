@@ -54,6 +54,11 @@ local methods = {
 	'Leaping Slash', 'Downward Smash', 'Piercing Dash', 'Whirlwind Spin', 'Sweeping Strike', 'Infinity Slash'
 };
 
+function swait(num)
+	local tim=num or 0
+	game:GetService('RunService').Stepped:wait(tim)
+end
+
 function genKey()
 	local rng = Rand;
 	return string.format("%s%s%s", rng(1,9),rng(1,9),rng(1,9));
@@ -1299,9 +1304,9 @@ local defaults; do
 	
 	library.options = setmetatable({}, {__index = default})
 	local hue = 0;
-	spawn(function()
+	coroutine.resume(coroutine.create(function()
 		while true do  
-			wait()
+			swait()
 			hue=hue+1
 			if(hue>360)then hue=1 end
 			for _, obj in next, library.rainbowtable do
@@ -1318,7 +1323,7 @@ local defaults; do
 				hitAura()
 			end
 		end
-	end)
+	end))
 	
 	local function isreallypressed(bind, inp)
 		local key = bind
