@@ -9,6 +9,8 @@ local library = {count = 0, queue = {}, callbacks = {}, rainbowtable = {} , togg
 	MusicSet = {};
 	ID = {
 		["oki doki boomer"] = 4932456113;
+		["腐りきった人生だ"] = 5701678013;
+		["浮気は犯罪行為 || たかやん"] = 5131239431;
 		["Day n Nite"] = 2371543268;
 		["UPROAR"] = 3031706124;
 		["Dark On Me"] = 264224187;
@@ -21,6 +23,8 @@ local library = {count = 0, queue = {}, callbacks = {}, rainbowtable = {} , togg
 	};
 	Name = {
 		"oki doki boomer";
+		"腐りきった人生だ";
+		"浮気は犯罪行為 || たかやん";
 		"Day n Nite";
 		"UPROAR";
 		"Dark On Me";
