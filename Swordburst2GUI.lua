@@ -11,6 +11,8 @@ local library = {count = 0, queue = {}, callbacks = {}, rainbowtable = {} , togg
 		["oki doki boomer"] = 4932456113;
 		["腐りきった人生だ"] = 5701678013;
 		["浮気は犯罪行為 || たかやん"] = 5131239431;
+		["gin$eng - damaged"] = 673106502;
+		["gin$eng - The Virus"] = 1328204242;
 		["Day n Nite"] = 2371543268;
 		["UPROAR"] = 3031706124;
 		["Dark On Me"] = 264224187;
@@ -25,6 +27,8 @@ local library = {count = 0, queue = {}, callbacks = {}, rainbowtable = {} , togg
 		"oki doki boomer";
 		"腐りきった人生だ";
 		"浮気は犯罪行為 || たかやん";
+		"gin$eng - damaged";
+		"gin$eng - The Virus";
 		"Day n Nite";
 		"UPROAR";
 		"Dark On Me";
