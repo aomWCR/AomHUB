@@ -5,6 +5,14 @@ Music.Looped = true
 Music.Volume = 1
 Music.Pitch = 1
 Music.TimePosition = 0
+
+game:GetService("StarterGui"):SetCore("SendNotification", {
+	Icon = "http://www.roblox.com/asset/?id=5766157314";
+	Title = "ใช่งาน : Dark Project";
+	Text = "ชื่อผู้ใช่ : "..game:GetService("Players").LocalPlayer.Name;
+	Duration = 15;
+})
+
 local library = {count = 0, queue = {}, callbacks = {}, rainbowtable = {} , toggled = true, binds = {},Music = Music,MusicSettings = {
 	MusicSet = {};
 	ID = {
