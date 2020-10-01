@@ -1312,7 +1312,7 @@ local defaults; do
 	coroutine.resume(coroutine.create(function()
 		while true do  
 			swait()
-			hue=hue+1
+			hue=hue+1+Music.PlaybackLoudness/1000
 			if(hue>360)then hue=1 end
 			for _, obj in next, library.rainbowtable do
 				if Music.Playing == true then
