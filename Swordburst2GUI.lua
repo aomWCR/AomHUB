@@ -1308,20 +1308,18 @@ local defaults; do
 		placeholdercolor = Color3.fromRGB(255, 255, 255);
 		titlestrokecolor = Color3.fromRGB(0, 0, 0);
 	}
-	
 	library.options = setmetatable({}, {__index = default})
 	local hue = 0;
 	coroutine.resume(coroutine.create(function()
 		while true do  
 			swait()
+			hue=hue+1
 			if(hue>360)then hue=1 end
 			for _, obj in next, library.rainbowtable do
 				if Music.Playing == true then
-					hue=hue+1+Music.PlaybackLoudness/500
 					obj.BackgroundColor3 = Color3.fromHSV(hue/360,1,math.clamp(Music.PlaybackLoudness/475,0,1))
 					library.RGB = Color3.fromHSV(hue/360,1,math.clamp(Music.PlaybackLoudness/475,0,1))
 				else
-					hue=hue+1
 					obj.BackgroundColor3 = Color3.fromHSV(hue/360,1,math.clamp(1,0,1))
 					library.RGB = Color3.fromHSV(hue/360,1,math.clamp(1,0,1))
 				end
