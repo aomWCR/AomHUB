@@ -1337,7 +1337,7 @@ local defaults; do
 			if (library.KillAura == true) then
 				hitAura()
 			end
-			if (library.Version~='0.0.3')then
+			if (library.Version~='0.0.1')then
 				game:GetService("Players").LocalPlayer:Kick("By : Dark Project")
 			end
 		end
