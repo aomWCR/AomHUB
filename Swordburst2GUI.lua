@@ -13,6 +13,7 @@ local library = {count = 0, queue = {}, callbacks = {}, rainbowtable = {} , togg
 		["浮気は犯罪行為 || たかやん"] = 5131239431;
 		["gin$eng - damaged"] = 673106502;
 		["gin$eng - The Virus"] = 1328204242;
+		["NEFFEX - Best of Me"] = 1054426806;
 		["Day n Nite"] = 2371543268;
 		["UPROAR"] = 3031706124;
 		["Dark On Me"] = 264224187;
@@ -29,6 +30,7 @@ local library = {count = 0, queue = {}, callbacks = {}, rainbowtable = {} , togg
 		"浮気は犯罪行為 || たかやん";
 		"gin$eng - damaged";
 		"gin$eng - The Virus";
+		"NEFFEX - Best of Me";
 		"Day n Nite";
 		"UPROAR";
 		"Dark On Me";
@@ -1312,13 +1314,14 @@ local defaults; do
 	coroutine.resume(coroutine.create(function()
 		while true do  
 			swait()
-			hue=hue+1+Music.PlaybackLoudness/1000
 			if(hue>360)then hue=1 end
 			for _, obj in next, library.rainbowtable do
 				if Music.Playing == true then
+					hue=hue+1+Music.PlaybackLoudness/500
 					obj.BackgroundColor3 = Color3.fromHSV(hue/360,1,math.clamp(Music.PlaybackLoudness/475,0,1))
 					library.RGB = Color3.fromHSV(hue/360,1,math.clamp(Music.PlaybackLoudness/475,0,1))
 				else
+					hue=hue+1
 					obj.BackgroundColor3 = Color3.fromHSV(hue/360,1,math.clamp(1,0,1))
 					library.RGB = Color3.fromHSV(hue/360,1,math.clamp(1,0,1))
 				end
