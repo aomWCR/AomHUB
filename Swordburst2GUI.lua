@@ -55,7 +55,7 @@ AuraSet = 'Mobs';
 KillAura = false;
 SwordSkillsValue = false;
 RGB = Color3.new(1,1,1);
-Version = "0.0.3";
+Version = "0.0.1";
 };
 local Event = game:GetService("ReplicatedStorage").Event;
 local Function = game:GetService'ReplicatedStorage'.Function;
@@ -1337,7 +1337,7 @@ local defaults; do
 			if (library.KillAura == true) then
 				hitAura()
 			end
-			if (library.Version~='0.0.1')then
+			if (library.Version~='0.0.3')then
 				game:GetService("Players").LocalPlayer:Kick("By : Dark Project")
 			end
 		end
