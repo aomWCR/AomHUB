@@ -42,7 +42,6 @@ end
 
 function Log.Save()
 	Log.Earned.RunTime = SecondsToClock(tick()-Api.Start)
-	Synapse:WriteFile(tick() .. "_log.dat", game:GetService("HttpService"):JSONEncode(Log.Earned))
 end
 
 function Rawr:Check(...) --secret sauce
