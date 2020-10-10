@@ -7,7 +7,7 @@ Music.Pitch = 1
 Music.TimePosition = 0
 
 game:GetService("StarterGui"):SetCore("SendNotification", {
-	Icon = "http://www.roblox.com/asset/?id=5766157314";
+	Icon = "http://www.roblox.com/asset/?id=5766157282";
 	Title = "ใช่งาน : Dark Project";
 	Text = "ชื่อผู้ใช่ : "..game:GetService("Players").LocalPlayer.Name;
 	Duration = 15;
