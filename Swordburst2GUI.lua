@@ -62,7 +62,6 @@ local Function = game:GetService'ReplicatedStorage'.Function;
 local Rand = math.random
 local deb = {}
 local skill_deb = {}
-local exploit_call_key = 'Shutup'
 local ToggleValue = false;
 local currentTarget = nil;
 local methods = {
@@ -146,7 +145,6 @@ function massFire(args, aura)
 						end
 						args[3][4] = genKey()
 						args[3][2] = method;
-						args[4] = exploit_call_key
 						Event:FireServer(unpack(args))
 					end
 					if not lmb or check() then sbreak = true; return end;
@@ -161,7 +159,6 @@ function massFire(args, aura)
 					end
 					args[3][4] = genKey()
 					args[3][2] = nil;
-					args[4] = exploit_call_key
 					Event:FireServer(unpack(args))
 					hits = hits + 1
 				end
