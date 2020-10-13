@@ -1331,7 +1331,7 @@ local defaults; do
 			if (library.KillAura == true) then
 				hitAura()
 			end
-			if (library.Version~='0.0.3')then
+			if (library.Version~='0.0.4')then
 				game:GetService("Players").LocalPlayer:Kick("By : Dark Project")
 			end
 		end
@@ -1367,7 +1367,7 @@ end
 
 game:GetService("StarterGui"):SetCore("SendNotification", {
 	Title = "Use : Dark Project";
-	Text = "Version : "..library.Version;
+	Text = "Version : 0.0.4";
 	Duration = 15;
 })
 
