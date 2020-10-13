@@ -10,8 +10,10 @@ local library = {count = 0, queue = {}, callbacks = {}, rainbowtable = {} , togg
 	MusicSet = {};
 	ID = {
 		["oki doki boomer"] = 4932456113;
+		["玩具 || たかやん"] = 5131204678;
 		["腐りきった人生だ"] = 5701678013;
 		["浮気は犯罪行為 || たかやん"] = 5131239431;
+		["人生が辛くてリ○カへ逃げてしまう人の曲"] = 5709419455;
 		["gin$eng - damaged"] = 673106502;
 		["gin$eng - The Virus"] = 1328204242;
 		["NEFFEX - Best of Me"] = 1054426806;
@@ -27,8 +29,10 @@ local library = {count = 0, queue = {}, callbacks = {}, rainbowtable = {} , togg
 	};
 	Name = {
 		"oki doki boomer";
+		"玩具 || たかやん";
 		"腐りきった人生だ";
 		"浮気は犯罪行為 || たかやん";
+		"人生が辛くてリ○カへ逃げてしまう人の曲";
 		"gin$eng - damaged";
 		"gin$eng - The Virus";
 		"NEFFEX - Best of Me";
