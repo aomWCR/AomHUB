@@ -136,8 +136,7 @@ function massFire(args, aura)
 						if (check()) then sbreak=true; break; end; 
 
 						if ((skill_deb[mob] and not skill_deb[mob][method]) or skill_deb[mob] == nil) then
-							Event:FireServer('Skills',{'UseSkill',method,{Direction=Vector3.new(0,0,0)}});
-							
+							--Event:FireServer('Skills',{'UseSkill',method,{Direction=Vector3.new(0,0,0)}});
 							Event:FireServer('Skills',{'UseSkill',method,{Direction=mob.HealthPos.Position}});
 							coroutine.wrap(applySkillDebounce)(mob, method)
 						end
@@ -1368,7 +1367,7 @@ end
 
 game:GetService("StarterGui"):SetCore("SendNotification", {
 	Title = "Use : Dark Project";
-	Text = "Version : 0.0.4";
+	Text = "Version : 0.0.4 [Test]";
 	Duration = 15;
 })
 
