@@ -205,7 +205,6 @@ local defaults; do
 		end
 		
 		function types.window2(name, options)
-			library.count = library.count + 1
 			local newWindow = library:Create('Frame', {
 				Name = name;
 				Size = UDim2.new(0, 190, 0, 30);
