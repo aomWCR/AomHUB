@@ -87,7 +87,7 @@ local defaults; do
 
 		game:GetService('UserInputService').InputBegan:connect(function(key, gpe)
 			if (not gpe) then
-				if key.KeyCode == Enum.KeyCode.F15 then
+				if key.KeyCode == Enum.KeyCode.Insert then
 					library.toggled = not library.toggled;
 					for i, data in next, library.queue do
 						local pos = (library.toggled and data.p or UDim2.new(-1, 0, -0.5,0))
@@ -203,7 +203,105 @@ local defaults; do
 
 			return window;
 		end
+		
+		function types.window2(name, options)
+			library.count = library.count + 1
+			local newWindow = library:Create('Frame', {
+				Name = name;
+				Size = UDim2.new(0, 190, 0, 30);
+				BackgroundColor3 = options.topcolor;
+				BorderSizePixel = 0;
+				Parent = library.container;
+				Position = UDim2.new(0, (15 + (200 * library.count) - 200), 0, 0);
+				ZIndex = 3;
+				library:Create('TextLabel', {
+					Text = name;
+					Size = UDim2.new(1, -10, 1, 0);
+					Position = UDim2.new(0, 5, 0, 0);
+					BackgroundTransparency = 1;
+					Font = Enum.Font.Code;
+					TextSize = options.titlesize;
+					Font = options.titlefont;
+					TextColor3 = options.titletextcolor;
+					TextStrokeTransparency = library.options.titlestroke;
+					TextStrokeColor3 = library.options.titlestrokecolor;
+					ZIndex = 3;
+				});
+				library:Create("TextButton", {
+					Size = UDim2.new(0, 30, 0, 30);
+					Position = UDim2.new(1, -35, 0, 0);
+					BackgroundTransparency = 1;
+					Text = "-";
+					TextSize = options.titlesize;
+					Font = options.titlefont;--Enum.Font.Code;
+					Name = 'window_toggle';
+					TextColor3 = options.titletextcolor;
+					TextStrokeTransparency = library.options.titlestroke;
+					TextStrokeColor3 = library.options.titlestrokecolor;
+					ZIndex = 3;
+				});
+				library:Create("Frame", {
+					Name = 'Underline';
+					Size = UDim2.new(1, 0, 0, 2);
+					Position = UDim2.new(0, 0, 1, -2);
+					BackgroundColor3 = (options.underlinecolor ~= "rainbow" and options.underlinecolor or Color3.new());
+					BorderSizePixel = 0;
+					ZIndex = 3;
+				});
+				library:Create('Frame', {
+					Name = 'container';
+					Position = UDim2.new(0, 0, 1, 0);
+					Size = UDim2.new(1, 0, 0, 0);
+					BorderSizePixel = 0;
+					BackgroundColor3 = options.bgcolor;
+					ClipsDescendants = false;
+					library:Create('UIListLayout', {
+						Name = 'List';
+						SortOrder = Enum.SortOrder.LayoutOrder;
+					})
+				});
+			})
 
+			if options.underlinecolor == "rainbow" then
+				table.insert(library.rainbowtable, newWindow:FindFirstChild('Underline'))
+			end
+
+			local window = setmetatable({
+				count = 0;
+				object = newWindow;
+				container = newWindow.container;
+				toggled = true;
+				flags   = {};
+
+			}, types)
+
+			newWindow:FindFirstChild("window_toggle").MouseButton1Click:connect(function()
+				window.toggled = not window.toggled;
+				newWindow:FindFirstChild("window_toggle").Text = (window.toggled and "+" or "-")
+				if (not window.toggled) then
+					window.container.ClipsDescendants = true;
+				end
+				wait();
+				local y = 0;
+				for i, v in next, window.container:GetChildren() do
+					if (not v:IsA('UIListLayout')) then
+						y = y + v.AbsoluteSize.Y;
+					end
+				end 
+
+				local targetSize = window.toggled and UDim2.new(1, 0, 0, y+5) or UDim2.new(1, 0, 0, 0);
+				local targetDirection = window.toggled and "In" or "Out"
+
+				window.container:TweenSize(targetSize, targetDirection, "Quad", 0.15, true)
+				wait(.15)
+				if window.toggled then
+					window.container.ClipsDescendants = false;
+				end
+			end)
+
+			return window;
+		end
+		
 		function types:Resize()
 			local y = 0;
 			for i, v in next, self.container:GetChildren() do
@@ -1113,7 +1211,7 @@ local defaults; do
 		dragger.new(window.object);
 		return window
 	end
-
+	
 	function library:CreateWindow2(name, options)
 		if (not library.container) then
 			library.container = self:Create("ScreenGui", {
@@ -1133,10 +1231,10 @@ local defaults; do
 		end
 
 		local window = types.window2(name, library.options);
-		dragger.new(window.object);
+		dragger.new(window2.object);
 		return window
 	end
-
+	
 	default = {
 		topcolor       = Color3.fromRGB(30, 30, 30);
 		titlecolor     = Color3.fromRGB(255, 255, 255);
