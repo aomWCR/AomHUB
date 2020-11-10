@@ -211,7 +211,7 @@ local defaults; do
 				BackgroundColor3 = options.topcolor;
 				BorderSizePixel = 0;
 				Parent = library.container;
-				Position = UDim2.new(0, (15 + (200 * library.count) - 200), 0, 0);
+				Position = UDim2.new(0, (15 + (200 * 1) - 200), 0, 0);
 				ZIndex = 3;
 				library:Create('TextLabel', {
 					Text = name;
