@@ -1224,14 +1224,6 @@ local defaults; do
 				Parent = game:GetService("CoreGui");
 			}):FindFirstChild('Container');
 		end
-
-		if (not library.options) then
-			library.options = setmetatable(options or {}, {__index = defaults})
-		end
-
-		local window = types.window2(name, library.options);
-		dragger.new(window.object);
-		return window
 	end
 	
 	default = {
