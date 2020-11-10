@@ -1,5 +1,5 @@
 local Music = Instance.new("Sound",game:GetService("Players").LocalPlayer.PlayerGui)
-Music.SoundId = "rbxassetid://4932456113"
+Music.SoundId = "rbxassetid://4839436924"
 Music.Playing = false
 Music.Looped = true
 Music.Volume = 1
@@ -25,6 +25,10 @@ local library = {count = 0, queue = {}, callbacks = {}, rainbowtable = {} , togg
 	};
 };
 LanguageSettings = {
+	LanguageSet = {
+		"English",
+		"ไทย",
+	};
 	["English"] = {
 		"Target";
 		"Bullet Speed";
