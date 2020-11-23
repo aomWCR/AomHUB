@@ -34,7 +34,7 @@ LanguageSettings = {
 			"Target";
 			"Bullet Speed";
 			"Equip Speed";
-			"Sprintspeed";
+			"Aim Speed";
 			"No Recoil";
 			"ESP";
 			"PhaseESP";
@@ -43,7 +43,7 @@ LanguageSettings = {
 			"เป้า";
 			"ความเร็วกระสุน";
 			"สับปืนไว";
-			"ความเร็วในการวิ่ง";
+			"เล็งกล้องเร็ว";
 			"ลดแรงดีด";
 			"มองทะรุ";
 			"ระยะการมอง";
