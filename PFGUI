@@ -34,6 +34,7 @@ LanguageSettings = {
 			"Target";
 			"Bullet Speed";
 			"Equip Speed";
+			"Sprintspeed";
 			"No Recoil";
 			"ESP";
 			"PhaseESP";
@@ -42,6 +43,7 @@ LanguageSettings = {
 			"เป้า";
 			"ความเร็วกระสุน";
 			"สับปืนไว";
+			"ความเร็วในการวิ่ง";
 			"ลดแรงดีด";
 			"มองทะรุ";
 			"ระยะการมอง";
@@ -203,7 +205,7 @@ local defaults; do
 
 			return window;
 		end
-		
+
 		function types:Resize()
 			local y = 0;
 			for i, v in next, self.container:GetChildren() do
@@ -1113,7 +1115,7 @@ local defaults; do
 		dragger.new(window.object);
 		return window
 	end
-	
+
 	default = {
 		topcolor       = Color3.fromRGB(30, 30, 30);
 		titlecolor     = Color3.fromRGB(255, 255, 255);
