@@ -88,7 +88,12 @@ local function draggable(obj)
 	end)
 end
 
-local lib = {KeyCode = Enum.KeyCode.Insert,mainframe = nil,toggled = true,setkey = false}
+function swait(num)
+	local tim=num or 0
+	game:GetService('RunService').Stepped:wait(tim)
+end
+
+local lib = {KeyCode = Enum.KeyCode.Insert,mainframe = nil,toggled = true,setkey = false,RGB = nil}
 coroutine.resume(coroutine.create(function()
 	game:GetService('UserInputService').InputBegan:connect(function(key, gpe)
 		if (not gpe) then
@@ -97,11 +102,20 @@ coroutine.resume(coroutine.create(function()
 					lib.toggled = not lib.toggled;
 					local pos = (lib.toggled and UDim2.new(0.019, 0, 0.04, 0) or UDim2.new(-1, 0, -0.5,0))
 					lib.mainframe:TweenPosition(pos, (lib.toggled and 'Out' or 'In'), 'Quad', 0.15, true)
-					wait();
+					swait();
 				end
 			end
 		end
 	end)
+end))
+
+coroutine.resume(coroutine.create(function()
+	local hue = 0;
+	while true do
+		swait()
+		if(hue>360)then hue=1 end
+		lib.RGB = Color3.fromHSV(hue/360,1,math.clamp(1,0,1))
+	end
 end))
 
 function lib:Window(text)
