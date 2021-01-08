@@ -196,7 +196,7 @@ function lib:Window(text)
 	title.BorderSizePixel = 0
 	title.Position = UDim2.new(0.0227272734, 0, 0.0364662446, 0)
 	title.Size = UDim2.new(0, 42, 0, 26)
-	title.Font = Enum.Font.Gotham
+	title.Font = Enum.Font.Jura
 	title.Text = text
 	title.TextColor3 = Color3.fromRGB(255, 255, 255)
 	title.TextSize = 15.000
@@ -228,7 +228,7 @@ function lib:Window(text)
 		tabbtn.BorderSizePixel = 0
 		tabbtn.BackgroundTransparency = 1
 		tabbtn.AutoButtonColor = false
-		tabbtn.Font = Enum.Font.Gotham
+		tabbtn.Font = Enum.Font.Jura
 		tabbtn.Text = title
 		tabbtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 		tabbtn.TextSize = 14.000
@@ -310,7 +310,7 @@ function lib:Window(text)
 			button.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
 			button.BorderSizePixel = 0
 			button.AutoButtonColor = false
-			button.Font = Enum.Font.Gotham
+			button.Font = Enum.Font.Jura
 			button.Text = text
 			button.TextColor3 = Color3.fromRGB(255, 255, 255)
 			button.TextSize = 14.000
@@ -382,7 +382,7 @@ function lib:Window(text)
 			button.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
 			button.BorderSizePixel = 0
 			button.AutoButtonColor = false
-			button.Font = Enum.Font.Gotham
+			button.Font = Enum.Font.Jura
 			button.Text = text
 			button.TextColor3 = Color3.fromRGB(255, 255, 255)
 			button.TextSize = 14.000
@@ -443,7 +443,7 @@ function lib:Window(text)
 			title.BackgroundTransparency = 1.000
 			title.BorderSizePixel = 0
 			title.Position = UDim2.new(0, 40, 0, 0)
-			title.Font = Enum.Font.Gotham
+			title.Font = Enum.Font.Jura
 			title.Text = text
 			title.Size = UDim2.new(0, 20, 1, 0)
 			title.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -544,7 +544,7 @@ function lib:Window(text)
 			title.Position = UDim2.new(0, 6, 0, 0)
 			title.Size = UDim2.new(0, 23, 1, 0)
 			title.ZIndex = 2
-			title.Font = Enum.Font.Gotham
+			title.Font = Enum.Font.Jura
 			title.Text = text
 			title.TextColor3 = Color3.fromRGB(255, 255, 255)
 			title.TextSize = 14.000
@@ -573,7 +573,7 @@ function lib:Window(text)
 			value.BackgroundTransparency = 1.000
 			value.BorderSizePixel = 0
 			value.Size = UDim2.new(1, 0, 1, 0)
-			value.Font = Enum.Font.Gotham
+			value.Font = Enum.Font.Jura
 			value.Text = tostring(start and math.floor((start / max) * (max - min) + min) or 0)
 			value.TextColor3 = Color3.fromRGB(255, 255, 255)
 			value.TextSize = 14.000
@@ -686,7 +686,7 @@ function lib:Window(text)
 			title.BorderSizePixel = 0
 			title.Position = UDim2.new(0, 8, 0, 0)
 			title.Size = UDim2.new(0, 23, 1, 0)
-			title.Font = Enum.Font.Gotham
+			title.Font = Enum.Font.Jura
 			title.Text = text
 			title.TextColor3 = Color3.fromRGB(255, 255, 255)
 			title.TextSize = 14.000
@@ -751,7 +751,7 @@ function lib:Window(text)
 				option.BorderSizePixel = 0
 				option.Size = UDim2.new(0, 146, 0, 27)
 				option.AutoButtonColor = false
-				option.Font = Enum.Font.Gotham
+				option.Font = Enum.Font.Jura
 				option.TextColor3 = Color3.fromRGB(255, 255, 255)
 				option.TextSize = 14.000
 				option.Text = v
@@ -820,7 +820,7 @@ function lib:Window(text)
 			title.Position = UDim2.new(0, 6, 0, 0)
 			title.Size = UDim2.new(0, 23, 1, 0)
 			title.ZIndex = 2
-			title.Font = Enum.Font.Gotham
+			title.Font = Enum.Font.Jura
 			title.Text = text
 			title.TextColor3 = Color3.fromRGB(255, 255, 255)
 			title.TextSize = 14.000
@@ -840,7 +840,7 @@ function lib:Window(text)
 			textboxmain.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
 			textboxmain.BorderSizePixel = 0
 			textboxmain.Size = UDim2.new(0, 165, 0, 26)
-			textboxmain.Font = Enum.Font.Gotham
+			textboxmain.Font = Enum.Font.Jura
 			textboxmain.Text = ""
 			textboxmain.TextColor3 = Color3.fromRGB(255, 255, 255)
 			textboxmain.TextSize = 14.000
