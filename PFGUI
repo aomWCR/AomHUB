@@ -113,6 +113,7 @@ coroutine.resume(coroutine.create(function()
 	local hue = 0;
 	while true do
 		swait()
+		hue = hue + 1
 		if(hue>360)then hue=1 end
 		lib.RGB = Color3.fromHSV(hue/360,1,math.clamp(1,0,1))
 	end
