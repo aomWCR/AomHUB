@@ -1,4 +1,9 @@
 local TweenService = game:GetService("TweenService")
+function Tween(obj,props,time,easing,direction,repeats,backwards)
+	local info = TweenInfo.new(time or .1, easing or Enum.EasingStyle.Quad, direction or Enum.EasingDirection.Out, repeats or 0, backwards or false)
+	local tween = TweenService:Create(obj, info, props)
+	tween:Play()
+end
 local function ripple(obj)
 	spawn(
 		function()
@@ -93,7 +98,7 @@ function swait(num)
 	game:GetService('RunService').Stepped:wait(tim)
 end
 
-local lib = {KeyCode = Enum.KeyCode.Insert,mainframe = nil,toggled = true,setkey = false,RGB = nil}
+local lib = {KeyCode = Enum.KeyCode.M,mainframe = nil,toggled = true,setkey = false,RGB = nil,Font=Enum.Font.Jura}
 coroutine.resume(coroutine.create(function()
 	game:GetService('UserInputService').InputBegan:connect(function(key, gpe)
 		if (not gpe) then
@@ -113,7 +118,6 @@ coroutine.resume(coroutine.create(function()
 	local hue = 0;
 	while true do
 		swait()
-		hue = hue + 1
 		if(hue>360)then hue=1 end
 		lib.RGB = Color3.fromHSV(hue/360,1,math.clamp(1,0,1))
 	end
@@ -137,6 +141,7 @@ function lib:Window(text)
 	VenLib.Name = "VenLib"
 	VenLib.Parent = game.CoreGui
 	VenLib.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+	VenLib.ResetOnSpawn = false
 
 	mainframe.Name = "mainframe"
 	mainframe.Parent = VenLib
@@ -196,7 +201,7 @@ function lib:Window(text)
 	title.BorderSizePixel = 0
 	title.Position = UDim2.new(0.0227272734, 0, 0.0364662446, 0)
 	title.Size = UDim2.new(0, 42, 0, 26)
-	title.Font = Enum.Font.Jura
+	title.Font = lib.Font
 	title.Text = text
 	title.TextColor3 = Color3.fromRGB(255, 255, 255)
 	title.TextSize = 15.000
@@ -228,7 +233,7 @@ function lib:Window(text)
 		tabbtn.BorderSizePixel = 0
 		tabbtn.BackgroundTransparency = 1
 		tabbtn.AutoButtonColor = false
-		tabbtn.Font = Enum.Font.Jura
+		tabbtn.Font = lib.Font
 		tabbtn.Text = title
 		tabbtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 		tabbtn.TextSize = 14.000
@@ -310,7 +315,7 @@ function lib:Window(text)
 			button.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
 			button.BorderSizePixel = 0
 			button.AutoButtonColor = false
-			button.Font = Enum.Font.Jura
+			button.Font = lib.Font
 			button.Text = text
 			button.TextColor3 = Color3.fromRGB(255, 255, 255)
 			button.TextSize = 14.000
@@ -335,6 +340,59 @@ function lib:Window(text)
 					pcall(callback)
 				end
 			)
+		end
+
+		function tab:TextLabel(text)
+			local textlabel = Instance.new("TextLabel")
+			textlabel.Name = "textlabel"
+			textlabel.Parent = container
+			textlabel.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+			textlabel.BorderSizePixel = 0
+			textlabel.Font = lib.Font
+			textlabel.Text = text
+			textlabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+			textlabel.TextSize = 14.000
+			textlabel.Size = UDim2.new(0, textlabel.TextBounds.X + 15, 0, 27)
+			textlabel.ClipsDescendants = true
+			container.CanvasSize = UDim2.new(0, 0, 0, containerlist.AbsoluteContentSize.Y + 10)
+			return textlabel
+		end
+
+		function tab:ChatTextLabel(text)
+			local textlabel = Instance.new("TextLabel")
+			textlabel.Name = "textlabel"
+			textlabel.Parent = container
+			textlabel.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+			textlabel.BorderSizePixel = 0
+			textlabel.Font = lib.Font
+			textlabel.Text = text
+			textlabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+			textlabel.TextSize = 14.000
+			textlabel.AutoLocalize = true
+			textlabel.TextWrapped = true
+			textlabel.Size = UDim2.new(1, 0, 0, 25)
+			textlabel.ClipsDescendants = true
+			textlabel.TextXAlignment = Enum.TextXAlignment.Left
+			container.CanvasSize = UDim2.new(0, 0, 0, containerlist.AbsoluteContentSize.Y + 10)
+			return textlabel
+		end
+
+		function tab:ImageLabel(image)
+			local imagelabel = Instance.new("ImageLabel")
+			imagelabel.Image = image
+			imagelabel.Name = "imagelabel"
+			imagelabel.Parent = container
+			imagelabel.Size = UDim2.new(0,70,0,70)
+			imagelabel.BackgroundColor3 = Color3.fromRGB(91, 93, 105)
+			imagelabel.BackgroundTransparency = .95
+			imagelabel.BorderSizePixel = 0
+			imagelabel.ClipsDescendants = true
+			container.CanvasSize = UDim2.new(0, 0, 0, containerlist.AbsoluteContentSize.Y + 10)
+			return imagelabel
+		end
+
+		function tab:containered()
+			return container
 		end
 
 		function tab:GuiNF(text)
@@ -382,7 +440,7 @@ function lib:Window(text)
 			button.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
 			button.BorderSizePixel = 0
 			button.AutoButtonColor = false
-			button.Font = Enum.Font.Jura
+			button.Font = lib.Font
 			button.Text = text
 			button.TextColor3 = Color3.fromRGB(255, 255, 255)
 			button.TextSize = 14.000
@@ -411,11 +469,17 @@ function lib:Window(text)
 				if (a.UserInputType ~= Enum.UserInputType.Keyboard and (allowed[a.UserInputType.Name])) or (a.KeyCode and (not banned[a.KeyCode.Name])) then
 					local name = (a.UserInputType ~= Enum.UserInputType.Keyboard and a.UserInputType.Name or a.KeyCode.Name);
 					lib.KeyCode = Enum.KeyCode[name]
-					button.Text = "เปิด หรือ ปิด เมนู : "..name;
+					button.Text = "Open or close the menu : "..name;
 					wait(0.1)
 					lib.setkey = false
 				end
 			end)
+			coroutine.resume(coroutine.create(function()
+				while true do
+					swait()
+					button.Size = UDim2.new(0, button.TextBounds.X + 15, 0, 27)
+				end
+			end))
 		end
 
 		function tab:Toggle(text, callback)
@@ -423,8 +487,7 @@ function lib:Window(text)
 			local title = Instance.new("TextLabel")
 			local status = Instance.new("Frame")
 			local toggled = false
-			callback = callback or function(...)
-			end
+			callback = callback or function(...)end
 			toggle.Name = "toggle"
 			toggle.Parent = container
 			toggle.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
@@ -443,7 +506,7 @@ function lib:Window(text)
 			title.BackgroundTransparency = 1.000
 			title.BorderSizePixel = 0
 			title.Position = UDim2.new(0, 40, 0, 0)
-			title.Font = Enum.Font.Jura
+			title.Font = lib.Font
 			title.Text = text
 			title.Size = UDim2.new(0, 20, 1, 0)
 			title.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -506,15 +569,21 @@ function lib:Window(text)
 				end
 			)
 
+			local rpt = TweenService:Create(status,TweenInfo.new(0.75, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{Rotation = 360})
+			local rpf = TweenService:Create(status,TweenInfo.new(0.75, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{Rotation = 0})
 			toggle.MouseButton1Click:Connect(
 				function()
+					Tween(title,{Rotation=math.random(-15,15)},.075,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
 					if toggled == false then
 						truetoggle:Play()
+						rpt:Play()
 						toggled = not toggled
 					else
 						falsetoggle:Play()
+						rpf:Play()
 						toggled = not toggled
 					end
+					Tween(title,{Rotation=0},.075,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
 					ripple(toggle)
 					callback(toggled)
 				end
@@ -544,7 +613,7 @@ function lib:Window(text)
 			title.Position = UDim2.new(0, 6, 0, 0)
 			title.Size = UDim2.new(0, 23, 1, 0)
 			title.ZIndex = 2
-			title.Font = Enum.Font.Jura
+			title.Font = lib.Font
 			title.Text = text
 			title.TextColor3 = Color3.fromRGB(255, 255, 255)
 			title.TextSize = 14.000
@@ -573,7 +642,7 @@ function lib:Window(text)
 			value.BackgroundTransparency = 1.000
 			value.BorderSizePixel = 0
 			value.Size = UDim2.new(1, 0, 1, 0)
-			value.Font = Enum.Font.Jura
+			value.Font = lib.Font
 			value.Text = tostring(start and math.floor((start / max) * (max - min) + min) or 0)
 			value.TextColor3 = Color3.fromRGB(255, 255, 255)
 			value.TextSize = 14.000
@@ -622,8 +691,7 @@ function lib:Window(text)
 		function tab:Dropdown(text, list, callback)
 			list = list or {}
 			local d = false
-			callback = callback or function(...)
-			end
+			local callback = callback or function() end;
 			local dropdown = Instance.new("TextButton")
 			local title = Instance.new("TextLabel")
 			local arrow = Instance.new("ImageButton")
@@ -686,7 +754,7 @@ function lib:Window(text)
 			title.BorderSizePixel = 0
 			title.Position = UDim2.new(0, 8, 0, 0)
 			title.Size = UDim2.new(0, 23, 1, 0)
-			title.Font = Enum.Font.Jura
+			title.Font = lib.Font
 			title.Text = text
 			title.TextColor3 = Color3.fromRGB(255, 255, 255)
 			title.TextSize = 14.000
@@ -751,7 +819,7 @@ function lib:Window(text)
 				option.BorderSizePixel = 0
 				option.Size = UDim2.new(0, 146, 0, 27)
 				option.AutoButtonColor = false
-				option.Font = Enum.Font.Jura
+				option.Font = lib.Font
 				option.TextColor3 = Color3.fromRGB(255, 255, 255)
 				option.TextSize = 14.000
 				option.Text = v
@@ -798,9 +866,10 @@ function lib:Window(text)
 			end
 		end
 
-		function tab:Textbox(text, disapeer, callback)
-			callback = callback or function(...)
-			end
+		function tab:Textbox(text, v, callback)
+			local type = v.type or ""
+			local disapeer = v.disapeer or ""
+			callback = callback or function(...)end
 			local textbox = Instance.new("Frame")
 			local title = Instance.new("TextLabel")
 			local textboxframe = Instance.new("Frame")
@@ -820,7 +889,7 @@ function lib:Window(text)
 			title.Position = UDim2.new(0, 6, 0, 0)
 			title.Size = UDim2.new(0, 23, 1, 0)
 			title.ZIndex = 2
-			title.Font = Enum.Font.Jura
+			title.Font = lib.Font
 			title.Text = text
 			title.TextColor3 = Color3.fromRGB(255, 255, 255)
 			title.TextSize = 14.000
@@ -840,7 +909,7 @@ function lib:Window(text)
 			textboxmain.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
 			textboxmain.BorderSizePixel = 0
 			textboxmain.Size = UDim2.new(0, 165, 0, 26)
-			textboxmain.Font = Enum.Font.Jura
+			textboxmain.Font = lib.Font
 			textboxmain.Text = ""
 			textboxmain.TextColor3 = Color3.fromRGB(255, 255, 255)
 			textboxmain.TextSize = 14.000
@@ -850,7 +919,11 @@ function lib:Window(text)
 				function(ep)
 					if ep then
 						if #textboxmain.Text > 0 then
-							pcall(callback, textboxmain.Text)
+							if type == "number" then
+								pcall(callback, tonumber(textboxmain.Text))
+							else
+								pcall(callback, tostring(textboxmain.Text))
+							end
 							if disapeer then
 								textboxmain.Text = ""
 							end
