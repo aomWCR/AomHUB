@@ -98,7 +98,7 @@ function swait(num)
 	game:GetService('RunService').Stepped:wait(tim)
 end
 
-local lib = {KeyCode = Enum.KeyCode.M,mainframe = nil,toggled = true,setkey = false,RGB = nil,Font=Enum.Font.Jura}
+local lib = {KeyCode = Enum.KeyCode.Insert,mainframe = nil,toggled = true,setkey = false,RGB = nil,Font=Enum.Font.Jura}
 coroutine.resume(coroutine.create(function()
 	game:GetService('UserInputService').InputBegan:connect(function(key, gpe)
 		if (not gpe) then
