@@ -853,6 +853,7 @@ function lib:Window(text)
 				option.MouseButton1Click:Connect(
 					function()
 						title.Text = v
+						callback(v)
 						d = not d
 						closetween:Play()
 						nt:Play()
