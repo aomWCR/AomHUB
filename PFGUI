@@ -137,6 +137,7 @@ function lib:Window(text)
 	local top = Instance.new("Frame")
 	local title = Instance.new("TextLabel")
 	local minimize = Instance.new("ImageButton")
+	local minimize2 = Instance.new("ImageLabel")
 
 	VenLib.Name = "VenLib"
 	VenLib.Parent = game.CoreGui
@@ -193,13 +194,22 @@ function lib:Window(text)
 	minimize.Image = "rbxassetid://3926307971"
 	minimize.ImageRectOffset = Vector2.new(884, 284)
 	minimize.ImageRectSize = Vector2.new(36, 36)
-
+	
+	minimize2.Name = "minimize2"
+	minimize2.Parent = top
+	minimize2.BackgroundTransparency = 1.000
+	minimize2.LayoutOrder = 6
+	minimize2.Position = UDim2.new(0.01, 0, 0.15, 0)
+	minimize2.Size = UDim2.new(0, 20, 0, 20)
+	minimize2.ZIndex = 2
+	minimize2.Image = "http://www.roblox.com/asset/?id=763743473"
+	
 	title.Name = "title"
 	title.Parent = top
 	title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	title.BackgroundTransparency = 1.000
 	title.BorderSizePixel = 0
-	title.Position = UDim2.new(0.0227272734, 0, 0.0364662446, 0)
+	title.Position = UDim2.new(0.06, 0, 0.036, 0)
 	title.Size = UDim2.new(0, 42, 0, 26)
 	title.Font = lib.Font
 	title.Text = text
