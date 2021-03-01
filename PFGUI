@@ -171,7 +171,6 @@ function lib:Window(text)
 	mainholder.BorderSizePixel = 0
 	mainholder.Position = UDim2.new(0, 0, -0.00381628261, 0)
 	mainholder.Size = UDim2.new(0, 396, 0, 27)
-	draggable(mainholder)
 	
 	containers.Name = "containers"
 	containers.Parent = mainholder
@@ -195,7 +194,8 @@ function lib:Window(text)
 	top.BorderSizePixel = 0
 	top.Position = UDim2.new(0, 0, -0.00381628261, 0)
 	top.Size = UDim2.new(0, 396, 0, 27)
-
+	draggable(top)
+	
 	minimize.Name = "minimize"
 	minimize.Parent = top
 	minimize.BackgroundTransparency = 1.000
