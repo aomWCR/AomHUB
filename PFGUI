@@ -1,4 +1,4 @@
-local lib = {KeyCode = Enum.KeyCode.Insert,mainframe = nil,toggled = true,setkey = false,RGB = nil,stopgui = false,Font=Enum.Font.Jura}
+local lib = {KeyCode = Enum.KeyCode.Insert,mainframe = nil,toggled = true,setkey = false,RGB = nil,Font=Enum.Font.Jura}
 local Mouse = game.Players.LocalPlayer:GetMouse()
 local Library = {
 	Theme = {
@@ -71,12 +71,10 @@ local function draggable(obj)
 	local dragStart
 	local startPos
 	local function update(input)
-		if lib.stopgui == false then
-			local delta = input.Position - dragStart
-			local EndPos = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-			local Tween = TweenService:Create(gui, TweenInfo.new(0.2), {Position = EndPos})
-			Tween:Play()
-		end
+		local delta = input.Position - dragStart
+		local EndPos = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+		local Tween = TweenService:Create(gui, TweenInfo.new(0.2), {Position = EndPos})
+		Tween:Play()
 	end
 	gui.InputBegan:Connect(
 		function(input)
@@ -166,7 +164,6 @@ function lib:Window(text)
 	mainframe.Position = UDim2.new(0.019, 0, 0.04, 0)
 	mainframe.Size = UDim2.new(0, 396, 0, 231)
 	lib.mainframe = mainframe
-	draggable(mainframe)
 
 	mainholder.Name = "mainholder"
 	mainholder.Parent = mainframe
@@ -174,7 +171,8 @@ function lib:Window(text)
 	mainholder.BorderSizePixel = 0
 	mainholder.Position = UDim2.new(0, 0, -0.00381628261, 0)
 	mainholder.Size = UDim2.new(0, 396, 0, 27)
-
+	draggable(mainholder)
+	
 	containers.Name = "containers"
 	containers.Parent = mainholder
 
@@ -1369,11 +1367,9 @@ function lib:Window(text)
 			ColorPickerToggle.MouseButton1Down:Connect(function()
 				ColorPickerToggled = not ColorPickerToggled
 				if ColorPickerToggled then
-					lib.stopgui = true
 					TweenService:Create(NameColorPicker, TweenInfo.new(0.5, Library.Theme.EasingStyle, Enum.EasingDirection.Out), {Size = UDim2.new(0, 197, 0, 210)}):Play()
 					TweenService:Create(ColorPicker, TweenInfo.new(0.5, Library.Theme.EasingStyle, Enum.EasingDirection.Out), {ImageTransparency = 0}):Play()
 				elseif not ColorPickerToggled then
-					lib.stopgui = false
 					TweenService:Create(NameColorPicker, TweenInfo.new(0.5, Library.Theme.EasingStyle, Enum.EasingDirection.Out), {Size = UDim2.new(0, 197, 0, 32)}):Play()
 					TweenService:Create(ColorPicker, TweenInfo.new(0.5, Library.Theme.EasingStyle, Enum.EasingDirection.Out), {ImageTransparency = 1}):Play()
 				end
