@@ -1000,14 +1000,14 @@ function lib:Window(text)
 			NameColorPicker.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 			NameColorPicker.BackgroundTransparency = 1.000
 			NameColorPicker.Position = UDim2.new(0, 0, 0.138121545, 0)
-			NameColorPicker.Size = UDim2.new(0, 197, 0, 32)
+			NameColorPicker.Size = UDim2.new(0, 197, 0, 25)
 			NameColorPicker.ClipsDescendants = true
 
 			Title.Name = "Title"
 			Title.Parent = NameColorPicker
 			Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 			Title.BackgroundTransparency = 1.000
-			Title.Position = UDim2.new(0, 13, 0, 0)
+			Title.Position = UDim2.new(0, 7, 0, 0)
 			Title.Size = UDim2.new(0, 151, 0, 30)
 			Title.ZIndex = 5
 			Title.Font = lib.Font
@@ -1242,11 +1242,9 @@ function lib:Window(text)
 				ValueG.Text = ("G: " .. math.floor(ColorPickerToggle.ImageColor3.g * 255))
 				ValueB.Text = ("B: " .. math.floor(ColorPickerToggle.ImageColor3.b * 255))
 			end
-
 			local function UpdateColorPicker(nope)
 				ColorPickerToggle.ImageColor3 = Color3.fromHSV(ColorH, ColorS, ColorV)
 				Color.BackgroundColor3 = Color3.fromHSV(ColorH, 1, 1)
-
 				SetRGBValues()
 				callback(ColorPickerToggle.ImageColor3)
 			end
@@ -1317,8 +1315,12 @@ function lib:Window(text)
 			end)
 
 			Toggle.MouseButton1Down:Connect(function()
-				RainbowColorPicker = not RainbowColorPicker
-
+				if RainbowColorPicker == false then
+					RainbowColorPicker = not RainbowColorPicker
+				else
+					RainbowColorPicker = not RainbowColorPicker
+				end
+				
 				if ColorInput then
 					ColorInput:Disconnect()
 				end
@@ -1368,7 +1370,6 @@ function lib:Window(text)
 
 			ColorPickerToggle.MouseButton1Down:Connect(function()
 				ColorPickerToggled = not ColorPickerToggled
-
 				if ColorPickerToggled then
 					TweenService:Create(NameColorPicker, TweenInfo.new(0.5, Library.Theme.EasingStyle, Enum.EasingDirection.Out), {Size = UDim2.new(0, 197, 0, 210)}):Play()
 					TweenService:Create(ColorPicker, TweenInfo.new(0.5, Library.Theme.EasingStyle, Enum.EasingDirection.Out), {ImageTransparency = 0}):Play()
