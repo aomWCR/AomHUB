@@ -1,4 +1,4 @@
-local lib = {KeyCode = Enum.KeyCode.Insert,mainframe = nil,toggled = true,setkey = false,moveui = true,Font=Enum.Font.Jura}
+local lib = {KeyCode = Enum.KeyCode.Insert,mainframe = nil,toggled = true,setkey = false,Font=Enum.Font.Jura}
 local Mouse = game.Players.LocalPlayer:GetMouse()
 local Library = {
 	Theme = {
@@ -100,9 +100,7 @@ local function draggable(obj)
 
 	UserInputService.InputChanged:Connect(function(input)
 		if input == dragInput and dragging then
-			if lib.moveui == true then
-				update(input)
-			end
+			update(input)
 		end
 	end)
 end
@@ -965,6 +963,7 @@ function lib:Window(text)
 		
 		function tab:ColorPicker(name, presetcolor, callback)
 			local NameColorPicker = Instance.new("Frame")
+			local AntiMoveUI = Instance.new("TextButton")
 			local Title = Instance.new("TextLabel")
 			local ColorPickerToggle = Instance.new("ImageButton")
 			local ColorPicker = Instance.new("ImageLabel")
@@ -1005,7 +1004,14 @@ function lib:Window(text)
 			NameColorPicker.Position = UDim2.new(0, 0, 0.138121545, 0)
 			NameColorPicker.Size = UDim2.new(0, 197, 0, 25)
 			NameColorPicker.ClipsDescendants = true
-
+			
+			AntiMoveUI.Name = "AntiMoveUI"
+			AntiMoveUI.Text = ""
+			AntiMoveUI.TextTransparency = 1
+			AntiMoveUI.TextStrokeTransparency = 1
+			AntiMoveUI.Size = UDim2.new(1, 0, 1, 0)
+			AntiMoveUI.BackgroundTransparency = 10
+			
 			Title.Name = "Title"
 			Title.Parent = NameColorPicker
 			Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -1373,7 +1379,6 @@ function lib:Window(text)
 
 			ColorPickerToggle.MouseButton1Down:Connect(function()
 				ColorPickerToggled = not ColorPickerToggled
-				lib.moveui = ColorPickerToggled
 				if ColorPickerToggled then
 					TweenService:Create(NameColorPicker, TweenInfo.new(0.5, Library.Theme.EasingStyle, Enum.EasingDirection.Out), {Size = UDim2.new(0, 197, 0, 210)}):Play()
 					TweenService:Create(ColorPicker, TweenInfo.new(0.5, Library.Theme.EasingStyle, Enum.EasingDirection.Out), {ImageTransparency = 0}):Play()
