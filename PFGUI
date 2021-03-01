@@ -1,9 +1,28 @@
+local lib = {KeyCode = Enum.KeyCode.Insert,mainframe = nil,toggled = true,setkey = false,RGB = nil,stopgui = false,Font=Enum.Font.Jura}
+local Mouse = game.Players.LocalPlayer:GetMouse()
+local Library = {
+	Theme = {
+		MainColor = Color3.fromRGB(255, 75, 75),
+		BackgroundColor = Color3.fromRGB(35, 35, 35),
+		UIToggleKey = Enum.KeyCode.RightControl,
+		TextFont = Enum.Font.SourceSansBold,
+		EasingStyle = Enum.EasingStyle.Quart
+	},
+	LibraryColorTable = {},
+	TabCount = 0,
+	FirstTab = nil,
+	CurrentlyBinding = false,
+	RainbowColorValue = 0,
+	HueSelectionPosition = 0
+}
 local TweenService = game:GetService("TweenService")
+
 function Tween(obj,props,time,easing,direction,repeats,backwards)
 	local info = TweenInfo.new(time or .1, easing or Enum.EasingStyle.Quad, direction or Enum.EasingDirection.Out, repeats or 0, backwards or false)
 	local tween = TweenService:Create(obj, info, props)
 	tween:Play()
 end
+
 local function ripple(obj)
 	spawn(
 		function()
@@ -46,22 +65,19 @@ end
 
 local function draggable(obj)
 	local UserInputService = game:GetService("UserInputService")
-
 	local gui = obj
-
 	local dragging
 	local dragInput
 	local dragStart
 	local startPos
-
 	local function update(input)
-		local delta = input.Position - dragStart
-		local EndPos =
-			UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-		local Tween = TweenService:Create(gui, TweenInfo.new(0.2), {Position = EndPos})
-		Tween:Play()
+		if lib.stopgui == false then
+			local delta = input.Position - dragStart
+			local EndPos = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+			local Tween = TweenService:Create(gui, TweenInfo.new(0.2), {Position = EndPos})
+			Tween:Play()
+		end
 	end
-
 	gui.InputBegan:Connect(
 		function(input)
 			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
@@ -79,7 +95,6 @@ local function draggable(obj)
 			end
 		end
 	)
-
 	gui.InputChanged:Connect(function(input)
 		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
 			dragInput = input
@@ -98,23 +113,6 @@ function swait(num)
 	game:GetService('RunService').Stepped:wait(tim)
 end
 
-local lib = {KeyCode = Enum.KeyCode.Insert,mainframe = nil,toggled = true,setkey = false,RGB = nil,Font=Enum.Font.Jura}
-local Mouse = game.Players.LocalPlayer:GetMouse()
-local Library = {
-	Theme = {
-		MainColor = Color3.fromRGB(255, 75, 75),
-		BackgroundColor = Color3.fromRGB(35, 35, 35),
-		UIToggleKey = Enum.KeyCode.RightControl,
-		TextFont = Enum.Font.SourceSansBold,
-		EasingStyle = Enum.EasingStyle.Quart
-	},
-	LibraryColorTable = {},
-	TabCount = 0,
-	FirstTab = nil,
-	CurrentlyBinding = false,
-	RainbowColorValue = 0,
-	HueSelectionPosition = 0
-}
 coroutine.resume(coroutine.create(function()
 	game:GetService('UserInputService').InputBegan:connect(function(key, gpe)
 		if (not gpe) then
@@ -1371,9 +1369,11 @@ function lib:Window(text)
 			ColorPickerToggle.MouseButton1Down:Connect(function()
 				ColorPickerToggled = not ColorPickerToggled
 				if ColorPickerToggled then
+					lib.stopgui = true
 					TweenService:Create(NameColorPicker, TweenInfo.new(0.5, Library.Theme.EasingStyle, Enum.EasingDirection.Out), {Size = UDim2.new(0, 197, 0, 210)}):Play()
 					TweenService:Create(ColorPicker, TweenInfo.new(0.5, Library.Theme.EasingStyle, Enum.EasingDirection.Out), {ImageTransparency = 0}):Play()
 				elseif not ColorPickerToggled then
+					lib.stopgui = false
 					TweenService:Create(NameColorPicker, TweenInfo.new(0.5, Library.Theme.EasingStyle, Enum.EasingDirection.Out), {Size = UDim2.new(0, 197, 0, 32)}):Play()
 					TweenService:Create(ColorPicker, TweenInfo.new(0.5, Library.Theme.EasingStyle, Enum.EasingDirection.Out), {ImageTransparency = 1}):Play()
 				end
