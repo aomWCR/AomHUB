@@ -1,4 +1,4 @@
-local lib = {KeyCode = Enum.KeyCode.Insert,mainframe = nil,toggled = true,setkey = false,RGB = nil,moveui = true,Font=Enum.Font.Jura}
+local lib = {KeyCode = Enum.KeyCode.Insert,mainframe = nil,toggled = true,setkey = false,moveui = true,Font=Enum.Font.Jura}
 local Mouse = game.Players.LocalPlayer:GetMouse()
 local Library = {
 	Theme = {
@@ -9,7 +9,6 @@ local Library = {
 		EasingStyle = Enum.EasingStyle.Quart
 	},
 	LibraryColorTable = {},
-	TabCount = 0,
 	FirstTab = nil,
 	CurrentlyBinding = false,
 	RainbowColorValue = 0,
@@ -128,14 +127,20 @@ coroutine.resume(coroutine.create(function()
 	end)
 end))
 
-coroutine.resume(coroutine.create(function()
-	local hue = 0;
-	while true do
-		swait()
-		if(hue>360)then hue=1 end
-		lib.RGB = Color3.fromHSV(hue/360,1,math.clamp(1,0,1))
+coroutine.wrap(function()
+	while wait() do
+		Library.RainbowColorValue = Library.RainbowColorValue + 1/255
+		Library.HueSelectionPosition = Library.HueSelectionPosition + 1
+
+		if Library.RainbowColorValue >= 1 then
+			Library.RainbowColorValue = 0
+		end
+
+		if Library.HueSelectionPosition == 105 then
+			Library.HueSelectionPosition = 0
+		end
 	end
-end))
+end)()
 
 function lib:Window(text)
 	local ft = false
