@@ -1,4 +1,4 @@
-local lib = {KeyCode = Enum.KeyCode.Insert,mainframe = nil,toggled = true,setkey = false,RGB = nil,Font=Enum.Font.Jura}
+local lib = {KeyCode = Enum.KeyCode.Insert,mainframe = nil,toggled = true,setkey = false,RGB = nil,moveui = true,Font=Enum.Font.Jura}
 local Mouse = game.Players.LocalPlayer:GetMouse()
 local Library = {
 	Theme = {
@@ -101,7 +101,9 @@ local function draggable(obj)
 
 	UserInputService.InputChanged:Connect(function(input)
 		if input == dragInput and dragging then
-			update(input)
+			if lib.moveui == true then
+				update(input)
+			end
 		end
 	end)
 end
@@ -164,6 +166,7 @@ function lib:Window(text)
 	mainframe.Position = UDim2.new(0.019, 0, 0.04, 0)
 	mainframe.Size = UDim2.new(0, 396, 0, 231)
 	lib.mainframe = mainframe
+	draggable(mainframe)
 
 	mainholder.Name = "mainholder"
 	mainholder.Parent = mainframe
@@ -194,7 +197,6 @@ function lib:Window(text)
 	top.BorderSizePixel = 0
 	top.Position = UDim2.new(0, 0, -0.00381628261, 0)
 	top.Size = UDim2.new(0, 396, 0, 27)
-	draggable(top)
 	
 	minimize.Name = "minimize"
 	minimize.Parent = top
@@ -1366,6 +1368,7 @@ function lib:Window(text)
 
 			ColorPickerToggle.MouseButton1Down:Connect(function()
 				ColorPickerToggled = not ColorPickerToggled
+				lib.moveui = ColorPickerToggled
 				if ColorPickerToggled then
 					TweenService:Create(NameColorPicker, TweenInfo.new(0.5, Library.Theme.EasingStyle, Enum.EasingDirection.Out), {Size = UDim2.new(0, 197, 0, 210)}):Play()
 					TweenService:Create(ColorPicker, TweenInfo.new(0.5, Library.Theme.EasingStyle, Enum.EasingDirection.Out), {ImageTransparency = 0}):Play()
