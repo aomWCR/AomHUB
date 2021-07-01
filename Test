@@ -28,6 +28,13 @@ function builder:Create(name, settings)
     gui[#gui + 1] = settings
 end
 
+function builder:CreateRGB(name, settings)
+    settings = settings or {}
+    settings["Name"] = name
+    settings["Type"] = "Section"
+    gui[#gui + 1] = settings
+end
+
 function builder:AddSlider(name, callback, settings)
     settings = settings or {}
     settings["Name"]      = name
@@ -84,6 +91,18 @@ for i,d in pairs(toggles) do
 	name.Color         = builder.RGB
 	end
 end))
+        name.Transparency  = 1
+        name.Size          = 18
+        name.Visible       = true
+        name.Font          = 3
+        name.Outline       = true
+        name.OutlineColor  = Color3.fromRGB(0,0,0)
+        toggles[i]["Text"] = name
+    end
+	if d["Type"] == "Section2" then
+        local name         = Drawing.new("Text")
+        name.Text          = d["Name"]
+        name.Color         = d["Color"] or Color3.fromRGB(255,255,0)
         name.Transparency  = 1
         name.Size          = 18
         name.Visible       = true
