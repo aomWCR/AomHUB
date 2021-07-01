@@ -12,7 +12,7 @@ name2.Position      = Vector2.new(10,40)]]--
 
 
 local gui = {}
-local builder = {RGB=Color3.new(1,1,1)}
+local builder = {RGB=Color3.new(1,1,1),Font=3}
 local hue = 0
 
 coroutine.resume(coroutine.create(function()
@@ -89,7 +89,7 @@ function builder:build()
 				name.Transparency  = 1
 				name.Size          = 18
 				name.Visible       = true
-				name.Font = 3
+				name.Font = builder.Font
 				name.Outline       = true
 				name.OutlineColor  = Color3.fromRGB(0,0,0)
 				toggles[i]["Text"] = name
@@ -106,7 +106,7 @@ function builder:build()
 				name.Transparency  = 1
 				name.Size          = 18
 				name.Visible       = true
-				name.Font = 3
+				name.Font = builder.Font
 				name.Outline       = true
 				name.OutlineColor  = Color3.fromRGB(0,0,0)
 				toggles[i]["Text"] = name
@@ -119,7 +119,7 @@ function builder:build()
 				name.Transparency    = 1
 				name.Size            = 18
 				name.Visible         = true
-				name.Font = 3
+				name.Font = builder.Font
 				name.Outline         = true
 				name.OutlineColor    = Color3.fromRGB(0,0,0)
 				local name2          = Drawing.new("Text")
@@ -128,7 +128,7 @@ function builder:build()
 				name2.Transparency   = 1
 				name2.Size           = 18
 				name2.Visible        = true
-				name2.Font = 3
+				name2.Font = builder.Font
 				name2.Outline         = true
 				name2.OutlineColor    = Color3.fromRGB(0,0,0)
 				toggles[i]["Text"]   = name
@@ -152,7 +152,7 @@ function builder:build()
 				name.Transparency     = 1
 				name.Size             = 18
 				name.Visible          = true
-				name.Font = 3
+				name.Font = builder.Font
 				name.Outline          = true
 				name.OutlineColor     = Color3.fromRGB(0,0,0)
 				local name2           = Drawing.new("Text")
@@ -161,7 +161,7 @@ function builder:build()
 				name2.Transparency    = 1
 				name2.Size            = 18
 				name2.Visible         = true
-				name2.Font = 3
+				name2.Font = builder.Font
 				name2.Outline         = true
 				name2.OutlineColor    = Color3.fromRGB(0,0,0)
 				toggles[i]["Text"]    = name
@@ -187,7 +187,7 @@ function builder:build()
 				name.Transparency    = 1
 				name.Size            = 18
 				name.Visible         = true
-				name.Font = 3
+				name.Font = builder.Font
 				name.Outline         = true
 				name.OutlineColor    = Color3.fromRGB(0,0,0)
 				local name2          = Drawing.new("Text")
@@ -196,7 +196,7 @@ function builder:build()
 				name2.Transparency   = 1
 				name2.Size           = 18
 				name2.Visible        = true
-				name2.Font = 3
+				name2.Font = builder.Font
 				name2.Outline         = true
 				name2.OutlineColor    = Color3.fromRGB(0,0,0)
 				toggles[i]["Text"]   = name
