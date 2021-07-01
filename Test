@@ -12,7 +12,7 @@ name2.Position      = Vector2.new(10,40)]]--
 
 
 local gui = {}
-local builder = {RGB=Color3.new(1,1,1),Font=7}
+local builder = {RGB=Color3.new(1,1,1),Font=7,Transparency = 1}
 local hue = 0
 
 coroutine.resume(coroutine.create(function()
@@ -76,7 +76,13 @@ function builder:build()
 		select.Size = Vector2.new(0,0)
 		select.Color = Color3.fromRGB(255,255,255)
 		select.Transparency = 0.05
-
+		
+		coroutine.resume(coroutine.create(function()
+			while true do game:GetService('RunService').Stepped:wait()
+				select.Color = Color3.fromHSV(hue/360,1,math.clamp(1,0,1))
+			end
+		end))
+		
 		actionservice:BindActionAtPriority('NoKeys', function()
 			return Enum.ContextActionResult.Sink
 		end, false, Enum.ContextActionPriority.High.Value, Enum.KeyCode.Up, Enum.KeyCode.Down, Enum.KeyCode.Left, Enum.KeyCode.Right)
