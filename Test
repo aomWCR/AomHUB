@@ -231,11 +231,11 @@ repeat
     for i,d in pairs(toggles) do
         d["Text"].Visible = true
         if d["Type"] == "Section" then
-            d["Text"].Position = Vector2.new(300, 5 + offset)
+            d["Text"].Position = Vector2.new(50, 5 + offset)
             offset = offset + d["Text"].TextBounds.Y
         end
         if d["Type"] == "Switch" then
-            d["Text"].Position = Vector2.new(300, 5 + offset)
+            d["Text"].Position = Vector2.new(50, 5 + offset)
             d["Text2"].Position = Vector2.new(120+ d["Text"].Position.X, 5 + offset)
             offset = offset + d["Text"].TextBounds.Y
             if switches > 0 and d["ID"] == selected then
@@ -244,7 +244,7 @@ repeat
             end
         end
         if d["Type"] == "Slider" then
-            d["Text"].Position = Vector2.new(300, 5 + offset)
+            d["Text"].Position = Vector2.new(50, 5 + offset)
             d["Text2"].Position = Vector2.new(120+ d["Text"].Position.X, 5 + offset)
             offset = offset + d["Text"].TextBounds.Y
             if switches > 0 and d["ID"] == selected then
@@ -253,7 +253,7 @@ repeat
             end
         end
         if d["Type"] == "Select" then
-            d["Text"].Position = Vector2.new(300, 5 + offset)
+            d["Text"].Position = Vector2.new(50, 5 + offset)
             d["Text2"].Position = Vector2.new(120+ d["Text"].Position.X, 5 + offset)
             offset = offset + d["Text"].TextBounds.Y
             if switches > 0 and d["ID"] == selected then
