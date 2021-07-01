@@ -106,7 +106,7 @@ for i,d in pairs(toggles) do
         toggles[i]["State"]  = false
         toggles[i]["Handle"] = function(input)
             toggles[i]["State"] = not toggles[i]["State"]
-            name2.Color = (toggles[i]["State"] and Color3.fromRGB(0,170,255) or Color3.fromRGB(255,255,255))
+            name2.Color = (toggles[i]["State"] and Color3.fromRGB(0, 255, 0) or Color3.fromRGB(170, 0, 0))
             name2.Text = (toggles[i]["State"] and "ON" or "OFF")
             if toggles[i]["Callback"] then
                 toggles[i]["Callback"](toggles[i]["State"])
@@ -231,11 +231,11 @@ repeat
     for i,d in pairs(toggles) do
         d["Text"].Visible = true
         if d["Type"] == "Section" then
-            d["Text"].Position = Vector2.new(50, 5 + offset)
+            d["Text"].Position = Vector2.new(100, 5 + offset)
             offset = offset + d["Text"].TextBounds.Y
         end
         if d["Type"] == "Switch" then
-            d["Text"].Position = Vector2.new(50, 5 + offset)
+            d["Text"].Position = Vector2.new(100, 5 + offset)
             d["Text2"].Position = Vector2.new(120+ d["Text"].Position.X, 5 + offset)
             offset = offset + d["Text"].TextBounds.Y
             if switches > 0 and d["ID"] == selected then
@@ -244,7 +244,7 @@ repeat
             end
         end
         if d["Type"] == "Slider" then
-            d["Text"].Position = Vector2.new(50, 5 + offset)
+            d["Text"].Position = Vector2.new(100, 5 + offset)
             d["Text2"].Position = Vector2.new(120+ d["Text"].Position.X, 5 + offset)
             offset = offset + d["Text"].TextBounds.Y
             if switches > 0 and d["ID"] == selected then
@@ -253,7 +253,7 @@ repeat
             end
         end
         if d["Type"] == "Select" then
-            d["Text"].Position = Vector2.new(50, 5 + offset)
+            d["Text"].Position = Vector2.new(100, 5 + offset)
             d["Text2"].Position = Vector2.new(120+ d["Text"].Position.X, 5 + offset)
             offset = offset + d["Text"].TextBounds.Y
             if switches > 0 and d["ID"] == selected then
