@@ -31,7 +31,7 @@ end
 function builder:CreateRGB(name, settings)
     settings = settings or {}
     settings["Name"] = name
-    settings["Type"] = "Section"
+    settings["Type"] = "Section2"
     gui[#gui + 1] = settings
 end
 
@@ -86,11 +86,6 @@ for i,d in pairs(toggles) do
         local name         = Drawing.new("Text")
         name.Text          = d["Name"]
         name.Color         = d["Color"] or Color3.fromRGB(255,255,0)
-	coroutine.resume(coroutine.create(function()
-	while true do game:GetService('RunService').Stepped:wait()
-	name.Color         = builder.RGB
-	end
-end))
         name.Transparency  = 1
         name.Size          = 18
         name.Visible       = true
@@ -103,6 +98,11 @@ end))
         local name         = Drawing.new("Text")
         name.Text          = d["Name"]
         name.Color         = d["Color"] or Color3.fromRGB(255,255,0)
+		coroutine.resume(coroutine.create(function()
+	while true do game:GetService('RunService').Stepped:wait()
+	name.Color         = builder.RGB
+	end
+end))
         name.Transparency  = 1
         name.Size          = 18
         name.Visible       = true
