@@ -12,7 +12,7 @@ name2.Position      = Vector2.new(10,40)]]--
 
 
 local gui = {}
-local builder = {RGB=Color3.new(1,1,1),Font=3}
+local builder = {RGB=Color3.new(1,1,1),Font=7}
 local hue = 0
 
 coroutine.resume(coroutine.create(function()
