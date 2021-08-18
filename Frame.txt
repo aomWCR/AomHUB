@@ -1,0 +1,45 @@
+local module = {}
+
+ArtificialHB = Instance.new("BindableEvent", script)
+ArtificialHB.Name = "ArtificialHB"
+
+script:WaitForChild("ArtificialHB")
+
+frame = 1 / 60
+tf = 0
+allowframeloss = false
+tossremainder = false
+lastframe = tick()
+script.ArtificialHB:Fire()
+
+game:GetService("RunService").Heartbeat:connect(function(s, p)
+    tf = tf + s
+    if tf >= frame then
+        if allowframeloss then
+            script.ArtificialHB:Fire()
+            lastframe = tick()
+        else
+            for i = 1, math.floor(tf / frame) do
+                script.ArtificialHB:Fire()
+            end
+            lastframe = tick()
+        end
+        if tossremainder then
+            tf = 0
+        else
+            tf = tf - frame * math.floor(tf / frame)
+        end
+    end
+end)
+
+function module:Swait(NUMBER)
+    if NUMBER == 0 or NUMBER == nil then
+        ArtificialHB.Event:wait()
+    else
+        for i = 1, NUMBER do
+            ArtificialHB.Event:wait()
+        end
+    end
+end
+
+return module
