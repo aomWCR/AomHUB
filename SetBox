@@ -1,0 +1,58 @@
+local GUIScript = {}
+local ReplicatedStorage = game.ReplicatedStorage
+local plrs = game:GetService("Players").LocalPlayer
+local Mouse = plrs:GetMouse()
+local lib = {mainframe = nil,toggled = true,setkey = false,Font=Enum.Font.Kalam}
+local Library = {
+	Theme = {
+		MainColor = Color3.fromRGB(255, 75, 75),
+		BackgroundColor = Color3.fromRGB(35, 35, 35),
+		UIToggleKey = Enum.KeyCode.RightControl,
+		TextFont = Enum.Font.SourceSansBold,
+		EasingStyle = Enum.EasingStyle.Quart
+	},
+	LibraryColorTable = {},
+	FirstTab = nil,
+	CurrentlyBinding = false,
+	RainbowColorValue = 0,
+	HueSelectionPosition = 0
+}
+
+function GUIScript:Box(box, options, callback)
+	local type  = options.type or "";
+	local default = options.default or "";
+	local data = options.data
+	local location = options.location or options.flags;
+	local flag     = options.flag or "";
+	local callback = callback or function() end;
+	local min      = options.min or 0;
+	local max      = options.max or 9e9;
+	if type == 'number' and (not tonumber(default)) then
+		location[flag] = default;
+	end
+	box.FocusLost:connect(function(e)
+		if tonumber(e) then
+			if type == "number" then
+				local num = tonumber(box.Text)
+				if (not num) then
+					box.Text = tonumber(location[flag])
+				else
+					location[flag] = math.clamp(num, min, max)
+					box.Text = tonumber(location[flag])
+				end
+			else
+				location[flag] = tostring(box.Text)
+			end
+			callback(e)
+		end
+	end)
+
+	if type == 'number' then
+		box:GetPropertyChangedSignal('Text'):connect(function()
+			box.Text = string.gsub(box.Text, "[%a+]", "");
+		end)
+	end
+	return box
+end
+
+return GUIScript
