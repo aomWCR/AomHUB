@@ -53,7 +53,11 @@ function MouseBot(part)
     else
         Tween(incrementX,{Value = (WorldToScreen(part.Position).X - WorldToScreen(Mouse.Hit.p).X) / Cheat.AimBot.Smoothness},Cheat.AimBot.Delay,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
         Tween(incrementY,{Value = (WorldToScreen(part.Position).Y - WorldToScreen(Mouse.Hit.p).Y) / Cheat.AimBot.Smoothness},Cheat.AimBot.Delay,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
-        syn_mousemoverel(incrementX.Value, incrementY.Value)
+        if syn_mousemoverel then
+            syn_mousemoverel(incrementX.Value, incrementY.Value)
+        else
+            mousemoverel(incrementX.Value, incrementY.Value)
+        end
     end
 end
 
@@ -63,12 +67,16 @@ local newposy = Instance.new("NumberValue")
 newposy.Value = 0
 function MouseBot2(part)
     if not part then
-        
+
     else
         local newpos = worldToScreenPoint(Camera, part)
         Tween(newposx,{Value = newpos.X},Cheat.AimBot.Delay,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
         Tween(newposy,{Value = newpos.Y},Cheat.AimBot.Delay,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
-        syn_mousemoverel((newposx.Value - Mouse.X) * .5, (newposy.Value - Mouse.Y) * .5)
+        if syn_mousemoverel then
+            syn_mousemoverel((newposx.Value - Mouse.X) * .5, (newposy.Value - Mouse.Y) * .5)
+        else
+            mousemoverel((newposx.Value - Mouse.X) * .5, (newposy.Value - Mouse.Y) * .5)
+        end        
     end
 end
 
