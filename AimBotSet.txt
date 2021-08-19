@@ -7,7 +7,7 @@ local Cheat = {
         ModeAim = "Camera";
         Use = false;
         Lock = false;
-        Delay = .05;
+        Delay = .5;
         Smoothness = 2;
         Team = true;
     };
@@ -69,13 +69,14 @@ function MouseBot2(part)
     if not part then
 
     else
-        local newpos = worldToScreenPoint(Camera, part).Position 
-        Tween(newposx,{Value = newpos.X},Cheat.AimBot.Delay,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
-        Tween(newposy,{Value = newpos.Y},Cheat.AimBot.Delay,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
+        local newpos = WorldToScreen(part.Position)
+        local mousepos = WorldToScreen(Mouse.Hit.p)
+        Tween(newposx,{Value = newpos.X},.75,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
+        Tween(newposy,{Value = newpos.Y},.75,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
         if syn_mousemoverel then
-            syn_mousemoverel((newposx.Value - Mouse.X) * .5, (newposy.Value - Mouse.Y) * .5)
+            syn_mousemoverel((newposx.Value - mousepos.X) * Cheat.AimBot.Delay, (newposy.Value - mousepos.Y) * Cheat.AimBot.Delay)
         else
-            mousemoverel((newposx.Value - Mouse.X) * .5, (newposy.Value - Mouse.Y) * .5)
+            mousemoverel((newposx.Value - mousepos.X) * Cheat.AimBot.Delay, (newposy.Value - mousepos.Y) * Cheat.AimBot.Delay)
         end        
     end
 end
