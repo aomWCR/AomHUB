@@ -72,11 +72,11 @@ function MouseBot2(part)
         local newpos = worldToScreenPoint(Camera, part)
         Tween(newposx,{Value = newpos.X},Cheat.AimBot.Delay,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
         Tween(newposy,{Value = newpos.Y},Cheat.AimBot.Delay,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
-        if syn_mousemoverel then
-            syn_mousemoverel((newposx.Value - Mouse.X) * .5, (newposy.Value - Mouse.Y) * .5)
-        else
+        --if syn_mousemoverel then
+            --syn_mousemoverel((newposx.Value - Mouse.X) * .5, (newposy.Value - Mouse.Y) * .5)
+        --else
             mousemoverel((newposx.Value - Mouse.X) * .5, (newposy.Value - Mouse.Y) * .5)
-        end        
+        --end        
     end
 end
 
