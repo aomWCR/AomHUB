@@ -74,16 +74,20 @@ function MouseBot2(part)
         Tween(newposx,{Value = newpos.X},Cheat.AimBot.Delay,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
         Tween(newposy,{Value = newpos.Y},Cheat.AimBot.Delay,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
         if syn_mousemoverel then
-            syn_mousemoverel((newposx.Value - mousepos.X) / Cheat.AimBot.Smoothness * Cheat.AimBot.Delay, (newposy.Value - mousepos.Y) * Cheat.AimBot.Delay)
+            syn_mousemoverel((newposx.Value - mousepos.X) / Cheat.AimBot.Smoothness, (newposy.Value - mousepos.Y) / Cheat.AimBot.Smoothness)--* Cheat.AimBot.Delay
         else
-            mousemoverel((newposx.Value - mousepos.X) / Cheat.AimBot.Smoothness * Cheat.AimBot.Delay, (newposy.Value - mousepos.Y) * Cheat.AimBot.Delay)
+            mousemoverel((newposx.Value - mousepos.X) / Cheat.AimBot.Smoothness, (newposy.Value - mousepos.Y) / Cheat.AimBot.Smoothness)--* Cheat.AimBot.Delay
         end        
     end
 end
 
+local campos = Instance.new("NumberValue")
+campos.Value = 0
 function CameraBot(part)
     if not part then
-    else Tween(Camera,{CFrame=CFrame.new(game.Workspace.CurrentCamera.CFrame.p,part.CFrame.p)},0.035,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
+    else 
+Tween(campos,{Value=part.CFrame.p},Cheat.AimBot.Delay,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
+Camera.CFrame = CFrame.new(game.Workspace.CurrentCamera.CFrame.p,part.CFrame.p)
     end
 end
 
