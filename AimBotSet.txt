@@ -81,13 +81,12 @@ function MouseBot2(part)
     end
 end
 
-local campos = Instance.new("NumberValue")
-campos.Value = 0
+local campos = Instance.new("CFrameValue")
 function CameraBot(part)
     if not part then
     else 
 Tween(campos,{Value=part.CFrame.p},Cheat.AimBot.Delay,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
-Camera.CFrame = CFrame.new(game.Workspace.CurrentCamera.CFrame.p,part.CFrame.p)
+Camera.CFrame = CFrame.new(game.Workspace.CurrentCamera.CFrame.p,campos.Value)
     end
 end
 
