@@ -66,9 +66,7 @@ newposx.Value = 0
 local newposy = Instance.new("NumberValue")
 newposy.Value = 0
 function MouseBot2(part)
-    if not part then
-
-    else
+    if not part then else
         local newpos = WorldToScreen(part.Position)
         local mousepos = WorldToScreen(Mouse.Hit.p)
         Tween(newposx,{Value = newpos.X},Cheat.AimBot.Delay,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
@@ -83,10 +81,9 @@ end
 
 local campos = Instance.new("CFrameValue")
 function CameraBot(part)
-    if not part then
-    else 
-Tween(campos,{Value=part.CFrame.p},Cheat.AimBot.Delay,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
-Camera.CFrame = CFrame.new(game.Workspace.CurrentCamera.CFrame.p,campos.Value)
+    if not part then else 
+        Tween(campos,{Value=part.CFrame},Cheat.AimBot.Delay,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
+        Camera.CFrame = CFrame.new(game.Workspace.CurrentCamera.CFrame.p,campos.Value.p)
     end
 end
 
