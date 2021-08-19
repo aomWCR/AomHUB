@@ -69,7 +69,7 @@ function MouseBot2(part)
     if not part then
 
     else
-        local newpos = worldToScreenPoint(Camera, part)
+        local newpos = WorldToScreen(part.Position)--worldToScreenPoint(Camera, part)
         Tween(newposx,{Value = newpos.X},Cheat.AimBot.Delay,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
         Tween(newposy,{Value = newpos.Y},Cheat.AimBot.Delay,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
         --if syn_mousemoverel then
