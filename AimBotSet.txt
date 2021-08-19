@@ -71,12 +71,12 @@ function MouseBot2(part)
     else
         local newpos = WorldToScreen(part.Position)
         local mousepos = WorldToScreen(Mouse.Hit.p)
-        Tween(newposx,{Value = newpos.X},.75,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
-        Tween(newposy,{Value = newpos.Y},.75,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
+        Tween(newposx,{Value = newpos.X},Cheat.AimBot.Delay,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
+        Tween(newposy,{Value = newpos.Y},Cheat.AimBot.Delay,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
         if syn_mousemoverel then
-            syn_mousemoverel((newposx.Value - mousepos.X) * Cheat.AimBot.Delay, (newposy.Value - mousepos.Y) * Cheat.AimBot.Delay)
+            syn_mousemoverel((newposx.Value - mousepos.X) / Cheat.AimBot.Smoothness * Cheat.AimBot.Delay, (newposy.Value - mousepos.Y) * Cheat.AimBot.Delay)
         else
-            mousemoverel((newposx.Value - mousepos.X) * Cheat.AimBot.Delay, (newposy.Value - mousepos.Y) * Cheat.AimBot.Delay)
+            mousemoverel((newposx.Value - mousepos.X) / Cheat.AimBot.Smoothness * Cheat.AimBot.Delay, (newposy.Value - mousepos.Y) * Cheat.AimBot.Delay)
         end        
     end
 end
