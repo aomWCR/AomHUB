@@ -1,6 +1,6 @@
 local module = {}
 
-ArtificialHB = Instance.new("BindableEvent", script)
+local ArtificialHB = Instance.new("BindableEvent")
 ArtificialHB.Name = "ArtificialHB"
 frame = 1 / 60
 tf = 0
