@@ -21,7 +21,7 @@ local Cheat = {
 		SelectedPart = "Head";
 		FOV = 70;
 		CircleVisibility = false;
-		VisibiltyCheck = false;
+		VisibiltyCheck = true;
 		Distance = 500;
 	};
 	list = {
@@ -61,7 +61,7 @@ function MouseBot(target)
 	if not target then
 	else
 		local BulletPrediction = target.HumanoidRootPart.Velocity * (game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position - target.HumanoidRootPart.Position).magnitude / 1200 / Cheat.AimBot.Settings.BP
-		local aimAt, visible = WorldToScreen(target.Head.Position + Vector3.new(0,game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position - target.HumanoidRootPart.Position.magnitude,0) + BulletPrediction) 
+		local aimAt, visible = WorldToScreen(target[Cheat.LockSet.SelectedPart].Position + Vector3.new(0,game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position - target.HumanoidRootPart.Position.magnitude,0) + BulletPrediction) 
 		mousemoverel((aimAt.X - UserInputService:GetMouseLocation().X) / Cheat.AimBot.Settings.Smooth, (aimAt.Y - UserInputService:GetMouseLocation().Y) / Cheat.AimBot.Settings.Smooth)
 	end
 end
@@ -198,16 +198,15 @@ game:GetService("RunService").RenderStepped:Connect(function()
 	else
 		if Cheat.AimBot.Use == true then
 			if Target.Character then
-				aimatpart = Target.Character[Cheat.LockSet.SelectedPart]
-				Tween(campos,{Value=Target.CFrame},Cheat.AimBot.Delay,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
+				aimatpart = Target.Character Tween(campos,{Value=Target[Cheat.LockSet.SelectedPart].CFrame},Cheat.AimBot.Delay,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
 			end
 		end
 	end
 	if Cheat.AimBot.Lock == true then
 		if Cheat.AimBot.ModeAim == "Mouse" then
-			MouseBot(aimatpart.Parent)
+			MouseBot(aimatpart)
 		elseif Cheat.AimBot.ModeAim == "Camera" then
-			CameraBot(aimatpart)
+			CameraBot(aimatpart[Cheat.LockSet.SelectedPart])
 		end
 	end
 end)
