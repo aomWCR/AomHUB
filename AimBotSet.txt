@@ -3,6 +3,25 @@ local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
 local UserInputService = game:GetService("UserInputService")
 local Camera = game:GetService("Workspace")["Camera"] or game:GetService("Workspace")["CurrentCamera"]
 
+local set = {
+	AimBot = {
+		false; --Enable
+		true; --TeamCheck
+		false; --WallCheck
+		5; --FOV
+		3; --Smooth
+		149; --BulletDrop
+		2.7; --BP
+		Enum.UserInputType.MouseButton2;--TriggerKey
+	};
+	ESP = {
+		false;
+		100;
+		Color3.new(1,0,0)
+	};
+
+}
+
 local Cheat = {
 	AimBot = {
 		ModeAim = "Camera";
@@ -10,7 +29,6 @@ local Cheat = {
 		Lock = false;
 		Delay = .5;
 		Team = true;
-		SelectedPart = "Head";
 		Settings = {
 			TriggerKey = Enum.UserInputType.MouseButton2;
 			Smooth = 3;
@@ -55,7 +73,11 @@ function Calculate(distance)
 end
 
 function MouseBot(target)
-	
+	if target ~= nil then
+		local BulletPrediction = target.HumanoidRootPart.Velocity * (game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position - target.HumanoidRootPart.Position).magnitude / 1200 / Cheat.AimBot.Settings.BP
+		local aimAt, visible = WorldToScreen(target.Head.Position + Vector3.new(0,Calculate((game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position - target.HumanoidRootPart.Position).magnitude),0) + BulletPrediction) 
+		mousemoverel((aimAt.X - UserInputService:GetMouseLocation().X) / Cheat.AimBot.Settings.Smooth, (aimAt.Y - UserInputService:GetMouseLocation().Y) / Cheat.AimBot.Settings.Smooth)
+	end
 end
 
 local campos = Instance.new("CFrameValue")
