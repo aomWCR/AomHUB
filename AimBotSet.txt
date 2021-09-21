@@ -69,7 +69,6 @@ end
 local campos = Instance.new("CFrameValue")
 function CameraBot(part)
 	if not part then else
-		Tween(campos,{Value=part.CFrame},Cheat.AimBot.Delay,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
 		Camera.CFrame = CFrame.new(game.Workspace.CurrentCamera.CFrame.p,campos.Value.p)
 	end
 end
@@ -200,12 +199,13 @@ game:GetService("RunService").RenderStepped:Connect(function()
 		if Cheat.AimBot.Use == true then
 			if Target.Character then
 				aimatpart = Target.Character[Cheat.LockSet.SelectedPart]
+				Tween(campos,{Value=Target.CFrame},Cheat.AimBot.Delay,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
 			end
 		end
 	end
 	if Cheat.AimBot.Lock == true then
 		if Cheat.AimBot.ModeAim == "Mouse" then
-			MouseBot(aimatpart)
+			MouseBot(aimatpart.Parent)
 		elseif Cheat.AimBot.ModeAim == "Camera" then
 			CameraBot(aimatpart)
 		end
