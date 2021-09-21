@@ -10,6 +10,7 @@ local Cheat = {
 		Lock = false;
 		Delay = .5;
 		Team = true;
+		SelectedPart = "Head";
 		Settings = {
 			TriggerKey = Enum.UserInputType.MouseButton2;
 			Smooth = 3;
