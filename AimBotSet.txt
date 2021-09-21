@@ -1,4 +1,3 @@
-@@ -1,229 +1,228 @@
 local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
 local Camera = game:GetService("Workspace")["Camera"] or game:GetService("Workspace")["CurrentCamera"]
 local aimatpart = nil
