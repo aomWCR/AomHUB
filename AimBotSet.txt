@@ -1,230 +1,205 @@
-local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
-local Camera = game:GetService("Workspace")["Camera"] or game:GetService("Workspace")["CurrentCamera"]
 local aimatpart = nil
+local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
+local UserInputService = game:GetService("UserInputService")
+local Camera = game:GetService("Workspace")["Camera"] or game:GetService("Workspace")["CurrentCamera"]
 
 local Cheat = {
-    AimBot = {
-        ModeAim = "Camera";
-        Use = false;
-        Lock = false;
-        Delay = .5;
-        Smoothness = 2;
-        Team = true;
-    };
-    LockSet = {
-        Color = Color3.fromRGB(255,255,255);
-        SelectedPart = "Head";
-        FOV = 70;
-        CircleVisibility = false;
-        VisibiltyCheck = false;
-        Distance = 500;
-    };
-    list = {
-        "Head";
-        "UpperTorso";
-        "LowerTorso";
-        "LeftUpperArm";
-        "RightUpperArm";
-        "RightLowerArm";
-        "LeftLowerArm";
-        "LeftHand";
-        "RightHand";
-    };
+	AimBot = {
+		ModeAim = "Camera";
+		Use = false;
+		Lock = false;
+		Delay = .5;
+		Team = true;
+		Settings = {
+			TriggerKey = Enum.UserInputType.MouseButton2;
+			Smooth = 3;
+			BP = 2.7;
+		};
+	};
+	LockSet = {
+		Color = Color3.fromRGB(255,255,255);
+		SelectedPart = "Head";
+		FOV = 70;
+		CircleVisibility = false;
+		VisibiltyCheck = true;
+		Distance = 500;
+	};
+	list = {
+		"Head";
+		"UpperTorso";
+		"LowerTorso";
+		"LeftUpperArm";
+		"RightUpperArm";
+		"RightLowerArm";
+		"LeftLowerArm";
+		"LeftHand";
+		"RightHand";
+	};
 }
 
 function Tween(obj,props,time,easing,direction,repeats,backwards)
-    local info = TweenInfo.new(time or .1, easing or Enum.EasingStyle.Quad, direction or Enum.EasingDirection.Out, repeats or 0, backwards or false)
-    local tween = game:GetService("TweenService"):Create(obj, info, props)
-    tween:Play()
+	local info = TweenInfo.new(time or .1, easing or Enum.EasingStyle.Quad, direction or Enum.EasingDirection.Out, repeats or 0, backwards or false)
+	local tween = game:GetService("TweenService"):Create(obj, info, props)
+	tween:Play()
 end
 
 
 local worldToScreenPoint = Camera.WorldToScreenPoint
 function WorldToScreen(Position)
-    return game.Workspace.CurrentCamera:WorldToScreenPoint(Position)
+	return game.Workspace.CurrentCamera:WorldToScreenPoint(Position)
 end
 
-local incrementX = Instance.new("NumberValue")
-incrementX.Value = 0
-local incrementY = Instance.new("NumberValue")
-incrementY.Value = 0
-function MouseBot(part)
-    if not part then
-    else
-        Tween(incrementX,{Value = (WorldToScreen(part.Position).X - WorldToScreen(Mouse.Hit.p).X) / Cheat.AimBot.Smoothness},Cheat.AimBot.Delay,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
-        Tween(incrementY,{Value = (WorldToScreen(part.Position).Y - WorldToScreen(Mouse.Hit.p).Y) / Cheat.AimBot.Smoothness},Cheat.AimBot.Delay,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
-        if syn_mousemoverel then
-            syn_mousemoverel(incrementX.Value, incrementY.Value)
-        else
-            mousemoverel(incrementX.Value, incrementY.Value)
-        end
-    end
+function Calculate(distance)
+	return (1.01*math.pow(distance,4)+0.002*math.pow(distance,3)-0.07*math.pow(distance,2)+0.8*distance-2.05)
 end
 
-local newposx = Instance.new("NumberValue")
-newposx.Value = 0
-local newposy = Instance.new("NumberValue")
-newposy.Value = 0
-function MouseBot2(part)
-    if not part then else
-        local newpos = WorldToScreen(part.Position)
-        local mousepos = WorldToScreen(Mouse.Hit.p)
-        Tween(newposx,{Value = newpos.X},Cheat.AimBot.Delay,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
-        Tween(newposy,{Value = newpos.Y},Cheat.AimBot.Delay,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
-        if syn_mousemoverel then
-            syn_mousemoverel((newposx.Value - mousepos.X) / Cheat.AimBot.Smoothness, (newposy.Value - mousepos.Y) / Cheat.AimBot.Smoothness)--* Cheat.AimBot.Delay
-        else
-            mousemoverel((newposx.Value - mousepos.X) / Cheat.AimBot.Smoothness, (newposy.Value - mousepos.Y) / Cheat.AimBot.Smoothness)--* Cheat.AimBot.Delay
-        end        
-    end
+function MouseBot(target)
+	
 end
 
 local campos = Instance.new("CFrameValue")
 function CameraBot(part)
-    if not part then else 
-        Tween(campos,{Value=part.CFrame},Cheat.AimBot.Delay,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
-    if not part then else
-        Camera.CFrame = CFrame.new(game.Workspace.CurrentCamera.CFrame.p,campos.Value.p)
-    end
+	if not part then else
+		Camera.CFrame = CFrame.new(game.Workspace.CurrentCamera.CFrame.p,campos.Value.p)
+	end
 end
 
 spawn(function()
-    local Circle = Drawing.new('Circle')
-    Circle.Transparency = 1
-    Circle.Thickness = 1.5
-    Circle.Visible = true
-    Circle.Color = Color3.fromRGB(255,0,0)
-    Circle.Filled = false
-    Circle.Radius = Cheat.LockSet.FOV
+	local Circle = Drawing.new('Circle')
+	Circle.Transparency = 1
+	Circle.Thickness = 1.5
+	Circle.Visible = true
+	Circle.Color = Color3.fromRGB(255,0,0)
+	Circle.Filled = false
+	Circle.Radius = Cheat.LockSet.FOV
 
-    local lineX = Drawing.new("Line")
-    lineX.Transparency = 1
-    lineX.Thickness = 1.5
-    lineX.Visible = true
-    lineX.Color = Color3.fromRGB(255,0,0)
+	local lineX = Drawing.new("Line")
+	lineX.Transparency = 1
+	lineX.Thickness = 1.5
+	lineX.Visible = true
+	lineX.Color = Color3.fromRGB(255,0,0)
 
-    local lineY = Drawing.new("Line")
-    lineX.Transparency = 1
-    lineY.Thickness = 1.5
-    lineY.Visible = true
-    lineY.Color = Color3.fromRGB(255,0,0)
+	local lineY = Drawing.new("Line")
+	lineX.Transparency = 1
+	lineY.Thickness = 1.5
+	lineY.Visible = true
+	lineY.Color = Color3.fromRGB(255,0,0)
 
-    game:GetService("RunService"):BindToRenderStep("Get_Fov",1,function()
-        local Length = 10
-        local Middle = 37
-        Circle.Visible = Cheat.LockSet.CircleVisibility
-        lineX.Visible = Cheat.LockSet.CircleVisibility
-        lineY.Visible = Cheat.LockSet.CircleVisibility 
-        Circle.Color = Cheat.LockSet.Color
-        lineX.Color = Cheat.LockSet.Color
-        lineY.Color = Cheat.LockSet.Color
-        Circle.Radius = Cheat.LockSet.FOV
-        Circle.Position = Vector2.new(Mouse.X,Mouse.Y+Middle)
-        lineX.From = Vector2.new((Mouse.X)+Length+1,Mouse.Y-0.5+Middle)
-        lineX.To = Vector2.new(Mouse.X-Length,Mouse.Y-0.5+Middle)
-        lineY.From = Vector2.new(Mouse.X,Mouse.Y+Length+Middle)
-        lineY.To = Vector2.new(Mouse.X,Mouse.Y-Length+Middle)
-    end)
+	game:GetService("RunService"):BindToRenderStep("Get_Fov",1,function()
+		local Length = 10
+		local Middle = 37
+		Circle.Visible = Cheat.LockSet.CircleVisibility
+		lineX.Visible = Cheat.LockSet.CircleVisibility
+		lineY.Visible = Cheat.LockSet.CircleVisibility 
+		Circle.Color = Cheat.LockSet.Color
+		lineX.Color = Cheat.LockSet.Color
+		lineY.Color = Cheat.LockSet.Color
+		Circle.Radius = Cheat.LockSet.FOV
+		Circle.Position = Vector2.new(Mouse.X,Mouse.Y+Middle)
+		lineX.From = Vector2.new((Mouse.X)+Length+1,Mouse.Y-0.5+Middle)
+		lineX.To = Vector2.new(Mouse.X-Length,Mouse.Y-0.5+Middle)
+		lineY.From = Vector2.new(Mouse.X,Mouse.Y+Length+Middle)
+		lineY.To = Vector2.new(Mouse.X,Mouse.Y-Length+Middle)
+	end)
 end)
 
 local function characterType(player)
-    if player.Character or workspace:FindFirstChild(player.Name) then
-        local playerCharacter = player.Character or workspace:FindFirstChild(player.Name)
-        return playerCharacter
-    end
+	if player.Character or workspace:FindFirstChild(player.Name) then
+		local playerCharacter = player.Character or workspace:FindFirstChild(player.Name)
+		return playerCharacter
+	end
 end
 
 local function returnVisibility(player)
-    if Cheat.LockSet.VisibiltyCheck then
-        if characterType(player) then 
-            if player.Character:FindFirstChild(Cheat.LockSet.SelectedPart) then 
-                CastPoint = {game.Players.LocalPlayer.Character[Cheat.LockSet.SelectedPart].Position, player.Character[Cheat.LockSet.SelectedPart].Position}
-                IgnoreList = {player.Character, game.Players.LocalPlayer.Character}
-                local castpointparts = workspace.CurrentCamera:GetPartsObscuringTarget(CastPoint, IgnoreList)
-                if unpack(castpointparts) then
-                    return false
-                end
-            end
-        end
-    end
-    return true
+	if Cheat.LockSet.VisibiltyCheck then
+		if characterType(player) then 
+			if player.Character:FindFirstChild(Cheat.LockSet.SelectedPart) then 
+				CastPoint = {game.Players.LocalPlayer.Character[Cheat.LockSet.SelectedPart].Position, player.Character[Cheat.LockSet.SelectedPart].Position}
+				IgnoreList = {player.Character, game.Players.LocalPlayer.Character}
+				local castpointparts = workspace.CurrentCamera:GetPartsObscuringTarget(CastPoint, IgnoreList)
+				if unpack(castpointparts) then
+					return false
+				end
+			end
+		end
+	end
+	return true
 end
 
 function getTarget()
-    local closestTarg = math.huge
-    local Target = nil
-    for _, Player in next, game.Players:GetPlayers() do
-        if Cheat.AimBot.Team == true then
-            if Player ~= game.Players.LocalPlayer and Player.Team.Name ~= game.Players.LocalPlayer.Team.Name and returnVisibility(Player) then
-                local playerCharacter = characterType(Player)
-                if playerCharacter then
-                    local playerHumanoid = playerCharacter:FindFirstChild("Humanoid")
-                    local playerHumanoidRP = playerCharacter:FindFirstChild(Cheat.LockSet.SelectedPart)
-                    if playerHumanoidRP and playerHumanoid then
-                        local hitVector, onScreen = Camera:WorldToScreenPoint(playerHumanoidRP.Position)
-                        if onScreen and playerHumanoid.Health > 0 then
-                            local CCF = Camera.CFrame.p
-                            if workspace:FindPartOnRayWithIgnoreList(Ray.new(CCF, (playerHumanoidRP.Position-CCF).unit * Cheat.LockSet.Distance),{Player}) then
-                                local hitTargMagnitude = (Vector2.new(Mouse.X, Mouse.Y) - Vector2.new(hitVector.X, hitVector.Y)).magnitude
-                                if hitTargMagnitude < closestTarg and hitTargMagnitude <= Cheat.LockSet.FOV then
-                                    Target = Player
-                                    closestTarg = hitTargMagnitude
-                                end
-                            else
-                            end
-                        else
-                        end
-                    end
-                end
-            end
-        elseif Cheat.AimBot.Team == false then
-            if Player ~= game.Players.LocalPlayer and returnVisibility(Player) then
-                local playerCharacter = characterType(Player)
-                if playerCharacter then
-                    local playerHumanoid = playerCharacter:FindFirstChild("Humanoid")
-                    local playerHumanoidRP = playerCharacter:FindFirstChild(Cheat.LockSet.SelectedPart)
-                    if playerHumanoidRP and playerHumanoid then
-                        local hitVector, onScreen = Camera:WorldToScreenPoint(playerHumanoidRP.Position)
-                        if onScreen and playerHumanoid.Health > 0 then
-                            local CCF = Camera.CFrame.p
-                            if workspace:FindPartOnRayWithIgnoreList(Ray.new(CCF, (playerHumanoidRP.Position-CCF).unit * Cheat.LockSet.Distance),{Player}) then
-                                local hitTargMagnitude = (Vector2.new(Mouse.X, Mouse.Y) - Vector2.new(hitVector.X, hitVector.Y)).magnitude
-                                if hitTargMagnitude < closestTarg and hitTargMagnitude <= Cheat.LockSet.FOV then
-                                    Target = Player
-                                    closestTarg = hitTargMagnitude
-                                end
-                            else
-                            end
-                        else
-                        end
-                    end
-                end
-            end
-        end
+	local closestTarg = math.huge
+	local Target = nil
+	for _, Player in next, game.Players:GetPlayers() do
+		if Cheat.AimBot.Team == true then
+			if Player ~= game.Players.LocalPlayer and Player.Team.Name ~= game.Players.LocalPlayer.Team.Name and returnVisibility(Player) then
+				local playerCharacter = characterType(Player)
+				if playerCharacter then
+					local playerHumanoid = playerCharacter:FindFirstChild("Humanoid")
+					local playerHumanoidRP = playerCharacter:FindFirstChild(Cheat.LockSet.SelectedPart)
+					if playerHumanoidRP and playerHumanoid then
+						local hitVector, onScreen = Camera:WorldToScreenPoint(playerHumanoidRP.Position)
+						if onScreen and playerHumanoid.Health > 0 then
+							local CCF = Camera.CFrame.p
+							if workspace:FindPartOnRayWithIgnoreList(Ray.new(CCF, (playerHumanoidRP.Position-CCF).unit * Cheat.LockSet.Distance),{Player}) then
+								local hitTargMagnitude = (Vector2.new(Mouse.X, Mouse.Y) - Vector2.new(hitVector.X, hitVector.Y)).magnitude
+								if hitTargMagnitude < closestTarg and hitTargMagnitude <= Cheat.LockSet.FOV then
+									Target = Player
+									closestTarg = hitTargMagnitude
+								end
+							else
+							end
+						else
+						end
+					end
+				end
+			end
+		elseif Cheat.AimBot.Team == false then
+			if Player ~= game.Players.LocalPlayer and returnVisibility(Player) then
+				local playerCharacter = characterType(Player)
+				if playerCharacter then
+					local playerHumanoid = playerCharacter:FindFirstChild("Humanoid")
+					local playerHumanoidRP = playerCharacter:FindFirstChild(Cheat.LockSet.SelectedPart)
+					if playerHumanoidRP and playerHumanoid then
+						local hitVector, onScreen = Camera:WorldToScreenPoint(playerHumanoidRP.Position)
+						if onScreen and playerHumanoid.Health > 0 then
+							local CCF = Camera.CFrame.p
+							if workspace:FindPartOnRayWithIgnoreList(Ray.new(CCF, (playerHumanoidRP.Position-CCF).unit * Cheat.LockSet.Distance),{Player}) then
+								local hitTargMagnitude = (Vector2.new(Mouse.X, Mouse.Y) - Vector2.new(hitVector.X, hitVector.Y)).magnitude
+								if hitTargMagnitude < closestTarg and hitTargMagnitude <= Cheat.LockSet.FOV then
+									Target = Player
+									closestTarg = hitTargMagnitude
+								end
+							else
+							end
+						else
+						end
+					end
+				end
+			end
+		end
 
-    end
-    return Target
+	end
+	return Target
 end
 
 game:GetService("RunService").RenderStepped:Connect(function()
-    local Target = getTarget()
-    if not Target then
-        aimatpart = nil
-    else
-        if Cheat.AimBot.Use == true then
-            if Target.Character then
-                aimatpart = Target.Character[Cheat.LockSet.SelectedPart]
-                aimatpart = Target.Character[Cheat.LockSet.SelectedPart] Tween(campos,{Value=aimatpart.CFrame},Cheat.AimBot.Delay,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
-            end
-        end
-    end
-    if Cheat.AimBot.Lock == true then
-        if Cheat.AimBot.ModeAim == "Mouse" then
-            MouseBot2(aimatpart)
-        elseif Cheat.AimBot.ModeAim == "Camera" then
-            CameraBot(aimatpart)
-        end
-    end
+	local Target = getTarget()
+	if not Target then
+		aimatpart = nil
+	else
+		if Cheat.AimBot.Use == true then
+			if Target.Character then
+				aimatpart = Target.Character Tween(campos,{Value=Target[Cheat.LockSet.SelectedPart].CFrame},Cheat.AimBot.Delay,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
+			end
+		end
+	end
+	if Cheat.AimBot.Lock == true then
+		if Cheat.AimBot.ModeAim == "Mouse" then
+			MouseBot(aimatpart)
+		elseif Cheat.AimBot.ModeAim == "Camera" then
+			CameraBot(aimatpart[Cheat.LockSet.SelectedPart])
+		end
+	end
 end)
 
 return Cheat
