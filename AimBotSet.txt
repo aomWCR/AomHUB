@@ -3,25 +3,6 @@ local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
 local UserInputService = game:GetService("UserInputService")
 local Camera = game:GetService("Workspace")["Camera"] or game:GetService("Workspace")["CurrentCamera"]
 
-local set = {
-	AimBot = {
-		false; --Enable
-		true; --TeamCheck
-		false; --WallCheck
-		5; --FOV
-		3; --Smooth
-		149; --BulletDrop
-		2.7; --BP
-		Enum.UserInputType.MouseButton2;--TriggerKey
-	};
-	ESP = {
-		false;
-		100;
-		Color3.new(1,0,0)
-	};
-
-}
-
 local Cheat = {
 	AimBot = {
 		ModeAim = "Camera";
@@ -40,7 +21,7 @@ local Cheat = {
 		SelectedPart = "Head";
 		FOV = 70;
 		CircleVisibility = false;
-		VisibiltyCheck = true;
+		VisibiltyCheck = false;
 		Distance = 500;
 	};
 	list = {
@@ -62,8 +43,6 @@ function Tween(obj,props,time,easing,direction,repeats,backwards)
 	tween:Play()
 end
 
-
-local worldToScreenPoint = Camera.WorldToScreenPoint
 function WorldToScreen(Position)
 	return game.Workspace.CurrentCamera:WorldToScreenPoint(Position)
 end
@@ -212,7 +191,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 	else
 		if Cheat.AimBot.Use == true then
 			if Target.Character then
-				aimatpart = Target.Character Tween(campos,{Value=Target[Cheat.LockSet.SelectedPart].CFrame},Cheat.AimBot.Delay,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
+				aimatpart = Target.Character Tween(campos,{Value=Target.Character[Cheat.LockSet.SelectedPart].CFrame},Cheat.AimBot.Delay,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
 			end
 		end
 	end
