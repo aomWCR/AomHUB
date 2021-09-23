@@ -792,7 +792,7 @@ do
 		return toggle
 	end
 
-	function section:addTextbox(title, default, callback)
+	function section:addTextbox(title, confix, callback)
 		local textbox = utility:Create("ImageButton", {
 			Name = "Textbox",
 			Parent = self.container,
@@ -838,7 +838,7 @@ do
 					Size = UDim2.new(1, -10, 1, 0),
 					ZIndex = 3,
 					Font = Enum.Font.GothamSemibold,
-					Text = default or "",
+					Text = confix.text or "",
 					TextColor3 = themes.TextColor,
 					TextSize = 11
 				})
@@ -850,7 +850,7 @@ do
 
 		local button = textbox.Button
 		local input = button.Textbox
-		if default == "number" then
+		if confix.type == "number" then
 			setboxtonumber:Box(input, {type='number',flag='number',min=0,max=9e9,default=5284661236}, function()
 				input.Text = string.gsub(input.Text, "[%a+]", "");
 			end)
