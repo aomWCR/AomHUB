@@ -10,7 +10,7 @@ local tween = game:GetService("TweenService")
 local tweeninfo = TweenInfo.new
 -- additional
 local utility = {}
-
+local NameHub = "LanezHub.JSON"
 -- themes
 local objects = {}
 local themes = {
@@ -21,6 +21,13 @@ local themes = {
 	DarkContrast = Color3.fromRGB(14, 14, 14),  
 	TextColor = Color3.fromRGB(255, 255, 255)
 }
+
+pcall(function()
+	if not pcall(function() readfile(NameHub) end) then
+		writefile(NameHub, game:service'HttpService':JSONEncode(themes))
+	end
+	themes = game:service'HttpService':JSONEncode(readfile(NameHub))
+end)
 
 do
 	function utility:Create(instance, properties, children)
