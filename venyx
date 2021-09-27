@@ -24,7 +24,7 @@ local themes = {
 
 pcall(function()
 	if not pcall(function() readfile(NameHub) end) then
-		writefile(NameHub, game:service'HttpService':JSONEncode(themes))
+		writefile(NameHub, game:service'HttpService':JSONEncode(themes)
 	end
 	themes = game:service'HttpService':JSONEncode(readfile(NameHub))
 end)
