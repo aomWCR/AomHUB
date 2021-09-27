@@ -22,12 +22,12 @@ local themes = {
 	TextColor = Color3.fromRGB(255, 255, 255)
 }
 
-pcall(function()
+--[[pcall(function()
 	if not pcall(function() readfile(NameHub) end) then
 		writefile(NameHub, game:service'HttpService':JSONEncode(themes)
 	end
 	themes = game:service'HttpService':JSONEncode(readfile(NameHub))
-end)
+end)]]
 
 do
 	function utility:Create(instance, properties, children)
