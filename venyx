@@ -2,15 +2,16 @@
 -- init
 local player = game.Players.LocalPlayer
 local mouse = player:GetMouse()
-local setboxtonumber = loadstring(game:HttpGet("https://raw.githubusercontent.com/aomWCR/AomHUB/master/SetBox"))()
+
 -- services
 local input = game:GetService("UserInputService")
 local run = game:GetService("RunService")
 local tween = game:GetService("TweenService")
 local tweeninfo = TweenInfo.new
+local Debris = game:GetService("Debris")
 -- additional
 local utility = {}
-local NameHub = "LanezHub.JSON"
+
 -- themes
 local objects = {}
 local themes = {
@@ -211,6 +212,59 @@ local library = {} -- main
 local page = {}
 local section = {}
 
+function Encode(Text)
+	Text = tostring(Text)
+	local Table = {}
+	for i = 1, #Text do
+		local T = Text:sub(i, i)
+		table.insert(Table, T)
+	end
+	local T = {}
+	local MyText = "'"
+	for i, v in pairs(Table) do
+		local Key = string.byte(v)
+		MyText = MyText..math.floor(Key/128)
+		Key = Key % 128
+		MyText = MyText..math.floor(Key/64)
+		Key = Key % 64
+		MyText = MyText..math.floor(Key/32)
+		Key = Key % 32
+		MyText = MyText..math.floor(Key/16)
+		Key = Key % 16
+		MyText = MyText..math.floor(Key/8)
+		Key = Key % 8
+		MyText = MyText..math.floor(Key/4)
+		Key = Key % 4
+		MyText = MyText..math.floor(Key/2)
+		Key = Key % 2
+		MyText = MyText..math.floor(Key/1)
+		Key = Key % 1
+		MyText=MyText.."','"
+	end
+	MyText = MyText:sub(1, #MyText -1)
+	if tonumber(MyText) then
+		MyText = tonumber(MyText)
+	end
+	return MyText
+end
+
+function soundc(button)
+	button.MouseButton1Click:Connect(function()
+		local Click = Instance.new("Sound",button)
+		Click.SoundId = "rbxassetid://1412830636"
+		Click.Volume = 3.5
+		Click:Play()
+		Debris:AddItem(Click,15)
+	end)
+	button.MouseEnter:Connect(function()
+		local Enter = Instance.new("Sound",button)
+		Enter.SoundId = "rbxassetid://6999397754"
+		Enter.Volume = 3.5
+		Enter:Play()
+		Debris:AddItem(Enter,15)
+	end)
+end
+
 do
 	library.__index = library
 	page.__index = page
@@ -367,7 +421,7 @@ do
 				Padding = UDim.new(0, 10)
 			})
 		})
-
+		soundc(button)
 		return setmetatable({
 			library = library,
 			container = container,
@@ -638,7 +692,8 @@ do
 		end
 
 		self.activeNotification = close
-
+		soundc(notification.Accept)
+		soundc(notification.Decline)
 		notification.Accept.MouseButton1Click:Connect(function()
 
 			if not active then 
@@ -697,7 +752,7 @@ do
 
 		local text = button.Title
 		local debounce
-
+		soundc(button)
 		button.MouseButton1Click:Connect(function()
 
 			if debounce then
@@ -784,7 +839,7 @@ do
 
 		local active = default
 		self:updateToggle(toggle, nil, active)
-
+		soundc(toggle)
 		toggle.MouseButton1Click:Connect(function()
 			active = not active
 			self:updateToggle(toggle, nil, active)
@@ -799,7 +854,7 @@ do
 		return toggle
 	end
 
-	function section:addTextbox(title, confix, callback)
+	function section:addTextbox(title, default, callback)
 		local textbox = utility:Create("ImageButton", {
 			Name = "Textbox",
 			Parent = self.container,
@@ -845,7 +900,7 @@ do
 					Size = UDim2.new(1, -10, 1, 0),
 					ZIndex = 3,
 					Font = Enum.Font.GothamSemibold,
-					Text = confix.text or "",
+					Text = default or "",
 					TextColor3 = themes.TextColor,
 					TextSize = 11
 				})
@@ -857,11 +912,7 @@ do
 
 		local button = textbox.Button
 		local input = button.Textbox
-		if confix.type == "number" then
-			setboxtonumber:Box(input, {type='number',flag='number',min=0,max=9e9,default=5284661236}, function()
-				input.Text = string.gsub(input.Text, "[%a+]", "");
-			end)
-		end
+		soundc(button)
 		textbox.MouseButton1Click:Connect(function()
 
 			if textbox.Button.Size ~= UDim2.new(0, 100, 0, 16) then
@@ -913,7 +964,7 @@ do
 
 	function section:addTextLabel(title)
 		local textlabel = utility:Create("ImageLabel", {
-			Name = "Textbox",
+			Name = "ImageLabel",
 			Parent = self.container,
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
@@ -943,6 +994,181 @@ do
 		return textlabel
 	end
 
+	function section:addObfuscate(title)
+		local Obfuscate = utility:Create("ImageLabel", {
+			Name = "Obfuscate",
+			Parent = self.container,
+			BackgroundTransparency = 1,
+			BorderSizePixel = 0,
+			Size = UDim2.new(1, 0, 0, 250),
+			ZIndex = 2,
+			Image = "rbxassetid://5028857472",
+			ImageColor3 = themes.DarkContrast,
+			ImageTransparency = 1,
+			ScaleType = Enum.ScaleType.Slice,
+			SliceCenter = Rect.new(2, 2, 298, 298)
+		},
+		{
+			utility:Create("UIListLayout", {
+				Name = "UIListLayout",
+				Padding = UDim.new(0, 5),
+				SortOrder = Enum.SortOrder.LayoutOrder,
+				HorizontalAlignment = Enum.HorizontalAlignment.Center,
+				VerticalAlignment = Enum.VerticalAlignment.Center,
+			}),
+			utility:Create("TextBox", {
+				Name = "TextBox",
+				AnchorPoint = Vector2.new(0, 0.5),
+				BackgroundTransparency = 1,
+				Position = UDim2.new(0, 10, 0.5, 1),
+				Size = UDim2.new(1, 0, .85, 0),
+				ZIndex = 3,
+				ClearTextOnFocus = false,
+				Font = Enum.Font.Gotham,
+				Text = "",
+				PlaceholderText = title,
+				TextColor3 = themes.TextColor,
+				TextSize = 12,
+				TextTransparency = 0.10000000149012,
+				TextWrapped = true,
+				TextXAlignment = Enum.TextXAlignment.Center,
+				TextYAlignment = Enum.TextYAlignment.Top,
+			},{
+				utility:Create("ImageLabel", {
+					Name = "ImageLabel",
+					BackgroundTransparency = 1,
+					BorderSizePixel = 0,
+					Size = UDim2.new(1, 0, 1, 0),
+					ZIndex = 2,
+					Image = "rbxassetid://5028857472",
+					ImageColor3 = themes.DarkContrast,
+					ScaleType = Enum.ScaleType.Slice,
+					SliceCenter = Rect.new(2, 2, 298, 298)
+				})
+			}),
+			utility:Create("ImageButton", {
+				Name = "Button",
+				BackgroundTransparency = 1,
+				BorderSizePixel = 0,
+				Size = UDim2.new(1, 0, 0, 30),
+				ZIndex = 2,
+				Image = "rbxassetid://5028857472",
+				ImageColor3 = themes.DarkContrast,
+				ScaleType = Enum.ScaleType.Slice,
+				SliceCenter = Rect.new(2, 2, 298, 298)
+			},{
+				utility:Create("TextLabel", {
+					Name = "Title",
+					BackgroundTransparency = 1,
+					Size = UDim2.new(1, 0, 1, 0),
+					ZIndex = 3,
+					Font = Enum.Font.Gotham,
+					Text = "Enter require Obfuscate",
+					TextColor3 = themes.TextColor,
+					TextSize = 12,
+					TextTransparency = 0.10000000149012
+				})
+			})
+		})
+		table.insert(self.modules, Obfuscate)
+		
+		local button = Obfuscate.Button
+		local input = Obfuscate.TextBox
+		soundc(button)
+		button.MouseButton1Click:Connect(function()
+			local Encoded = Encode(input.Text)
+			input.Text = [[local LanezHub = ]].."table.concat({"..Encoded.."})"..[[ function decode(str) local function cT1iGLZtX2d5bed6d6e811efe6(bin) return string.char(tonumber(bin, 2));end;return (str:gsub("(".. ("[01]"):rep(8) .. ")", cT1iGLZtX2d5bed6d6e811efe6));end;local Binary = LanezHub _G.e4d6cde4bbd0c0c2d5bed6d6e811efe6 = decode(Binary);loadstring(_G.e4d6cde4bbd0c0c2d5bed6d6e811efe6)()]]
+		end)
+	end
+
+	function section:addExploit(title,callback)
+		local Exploit = utility:Create("ImageLabel", {
+			Name = "Exploit",
+			Parent = self.container,
+			BackgroundTransparency = 1,
+			BorderSizePixel = 0,
+			Size = UDim2.new(1, 0, 0, 250),
+			ZIndex = 2,
+			Image = "rbxassetid://5028857472",
+			ImageColor3 = themes.DarkContrast,
+			ImageTransparency = 1,
+			ScaleType = Enum.ScaleType.Slice,
+			SliceCenter = Rect.new(2, 2, 298, 298)
+		},
+		{
+			utility:Create("UIListLayout", {
+				Name = "UIListLayout",
+				Padding = UDim.new(0, 5),
+				SortOrder = Enum.SortOrder.LayoutOrder,
+				HorizontalAlignment = Enum.HorizontalAlignment.Center,
+				VerticalAlignment = Enum.VerticalAlignment.Center,
+			}),
+			utility:Create("TextBox", {
+				Name = "TextBox",
+				AnchorPoint = Vector2.new(0, 0.5),
+				BackgroundTransparency = 1,
+				Position = UDim2.new(0, 10, 0.5, 1),
+				Size = UDim2.new(1, 0, .85, 0),
+				ZIndex = 3,
+				ClearTextOnFocus = false,
+				Font = Enum.Font.Gotham,
+				Text = "",
+				PlaceholderText = title,
+				TextColor3 = themes.TextColor,
+				TextSize = 12,
+				TextTransparency = 0.10000000149012,
+				TextWrapped = true,
+				TextXAlignment = Enum.TextXAlignment.Center,
+				TextYAlignment = Enum.TextYAlignment.Top,
+			},{
+				utility:Create("ImageLabel", {
+					Name = "ImageLabel",
+					BackgroundTransparency = 1,
+					BorderSizePixel = 0,
+					Size = UDim2.new(1, 0, 1, 0),
+					ZIndex = 2,
+					Image = "rbxassetid://5028857472",
+					ImageColor3 = themes.DarkContrast,
+					ScaleType = Enum.ScaleType.Slice,
+					SliceCenter = Rect.new(2, 2, 298, 298)
+				})
+			}),
+			utility:Create("ImageButton", {
+				Name = "Button",
+				BackgroundTransparency = 1,
+				BorderSizePixel = 0,
+				Size = UDim2.new(1, 0, 0, 30),
+				ZIndex = 2,
+				Image = "rbxassetid://5028857472",
+				ImageColor3 = themes.DarkContrast,
+				ScaleType = Enum.ScaleType.Slice,
+				SliceCenter = Rect.new(2, 2, 298, 298)
+			},{
+				utility:Create("TextLabel", {
+					Name = "Title",
+					BackgroundTransparency = 1,
+					Size = UDim2.new(1, 0, 1, 0),
+					ZIndex = 3,
+					Font = Enum.Font.Gotham,
+					Text = "Enter Exploit",
+					TextColor3 = themes.TextColor,
+					TextSize = 12,
+					TextTransparency = 0.10000000149012
+				})
+			})
+		})
+		table.insert(self.modules, Exploit)
+
+		local button = Exploit.Button
+		local input = Exploit.TextBox
+		soundc(button)
+		button.MouseButton1Click:Connect(function()
+			if callback then
+				callback(input.Text)
+			end
+		end)
+	end
+	
 	function section:addKeybind(title, default, callback, changedCallback)
 		local keybind = utility:Create("ImageButton", {
 			Name = "Keybind",
@@ -1020,7 +1246,7 @@ do
 		if default and callback then
 			self:updateKeybind(keybind, nil, default)
 		end
-
+		soundc(keybind)
 		keybind.MouseButton1Click:Connect(function()
 
 			animate()
@@ -1557,17 +1783,17 @@ do
 			animate(not toggle)
 		end
 
-		button.MouseButton1Click:Connect(toggleTab)
-		colorpicker.MouseButton1Click:Connect(toggleTab)
+		button.MouseButton1Click:Connect(toggleTab)soundc(button)
+		colorpicker.MouseButton1Click:Connect(toggleTab)soundc(colorpicker)
 
 		tab.Container.Button.MouseButton1Click:Connect(function()
 			animate()
-		end)
+		end)soundc( tab.Container.Button)
 
 		tab.Close.MouseButton1Click:Connect(function()
 			self:updateColorPicker(colorpicker, nil, lastColor)
 			animate() callback(default)
-		end)
+		end)soundc(tab.Close)
 
 		return colorpicker
 	end
