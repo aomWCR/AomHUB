@@ -3,6 +3,7 @@
 local player = game.Players.LocalPlayer
 local mouse = player:GetMouse()
 local setboxtonumber = loadstring(game:HttpGet("https://raw.githubusercontent.com/aomWCR/AomHUB/master/SetBox"))()
+getgenv().frame = loadstring(game:HttpGet("https://raw.githubusercontent.com/aomWCR/AomHUB/master/Frame.txt"))()
 -- services
 local input = game:GetService("UserInputService")
 local run = game:GetService("RunService")
@@ -28,6 +29,10 @@ local themes = {
 	end
 	themes = game:service'HttpService':JSONEncode(readfile(NameHub))
 end)]]
+
+function Swait(num)
+	getgenv().frame:Swait(num)
+end
 
 do
 	function utility:Create(instance, properties, children)
@@ -60,6 +65,7 @@ do
 	end
 
 	function utility:Wait()
+		Swait()
 		run.RenderStepped:Wait()
 		return true
 	end
