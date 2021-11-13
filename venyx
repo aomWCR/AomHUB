@@ -36,16 +36,6 @@ if syn and makefolder then
 				writefile("LanezHub/Load.Key", game:service'HttpService':JSONEncode(getgenv().Load))
 			end
 		end
-		if isfile("LanezHub/Color3.JSON") then
-			themes = game:service'HttpService':JSONEncode(readfile("LanezHub/Color3.JSON"))
-		else
-			pcall(function()
-				if not pcall(function() readfile("LanezHub/Color3.JSON") end) then
-					writefile("LanezHub/Color3.JSON", game:service'HttpService':JSONEncode(themes))
-				end
-				themes = game:service'HttpService':JSONEncode(readfile("LanezHub/Color3.JSON"))
-			end)
-		end
 	else
 		makefolder("LanezHub")
 		if syn and writefile then
@@ -54,16 +44,6 @@ if syn and makefolder then
 			else
 				writefile("LanezHub/Load.Key", game:service'HttpService':JSONEncode(getgenv().Load))
 			end
-		end
-		if isfile("LanezHub/Color3.JSON") then
-			themes = game:service'HttpService':JSONEncode(readfile("LanezHub/Color3.JSON"))
-		else
-			pcall(function()
-				if not pcall(function() readfile("LanezHub/Color3.JSON") end) then
-					writefile("LanezHub/Color3.JSON", game:service'HttpService':JSONEncode(themes))
-				end
-				themes = game:service'HttpService':JSONEncode(readfile("LanezHub/Color3.JSON"))
-			end)
 		end
 	end
 end
