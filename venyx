@@ -12,6 +12,10 @@ local tweeninfo = TweenInfo.new
 -- additional
 local utility = {}
 local NameHub = "LanezHub.JSON"
+getgenv().Load = {
+	use = game.Players.LocalPlayer.Name,
+	key = "AddKey"
+}
 -- themes
 local objects = {}
 local themes = {
@@ -24,15 +28,43 @@ local themes = {
 }
 
 if syn and makefolder then
-	if isfile("LanezHub/Color3.JSON") then
-		themes = game:service'HttpService':JSONEncode(readfile("LanezHub/Color3.JSON"))
-	else
-		pcall(function()
-			if not pcall(function() readfile("LanezHub/Color3.JSON") end) then
-				writefile("LanezHub/Color3.JSON", game:service'HttpService':JSONEncode(themes))
+	if isfolder("LanezHub") then
+		if syn and writefile then
+			if isfile('LanezHub/Load.Key') then
+				getgenv().Load = game:service'HttpService':JSONEncode(readfile("LanezHub/Load.Key"))
+			else
+				writefile("LanezHub/Load.Key", game:service'HttpService':JSONEncode(getgenv().Load))
 			end
+		end
+		if isfile("LanezHub/Color3.JSON") then
 			themes = game:service'HttpService':JSONEncode(readfile("LanezHub/Color3.JSON"))
-		end)
+		else
+			pcall(function()
+				if not pcall(function() readfile("LanezHub/Color3.JSON") end) then
+					writefile("LanezHub/Color3.JSON", game:service'HttpService':JSONEncode(themes))
+				end
+				themes = game:service'HttpService':JSONEncode(readfile("LanezHub/Color3.JSON"))
+			end)
+		end
+	else
+		makefolder("LanezHub")
+		if syn and writefile then
+			if isfile('LanezHub/Load.Key') then
+				getgenv().Load = game:service'HttpService':JSONEncode(readfile("LanezHub/Load.Key"))
+			else
+				writefile("LanezHub/Load.Key", game:service'HttpService':JSONEncode(getgenv().Load))
+			end
+		end
+		if isfile("LanezHub/Color3.JSON") then
+			themes = game:service'HttpService':JSONEncode(readfile("LanezHub/Color3.JSON"))
+		else
+			pcall(function()
+				if not pcall(function() readfile("LanezHub/Color3.JSON") end) then
+					writefile("LanezHub/Color3.JSON", game:service'HttpService':JSONEncode(themes))
+				end
+				themes = game:service'HttpService':JSONEncode(readfile("LanezHub/Color3.JSON"))
+			end)
+		end
 	end
 end
 
