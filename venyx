@@ -23,12 +23,14 @@ local themes = {
 	TextColor = Color3.fromRGB(255, 255, 255)
 }
 
---[[pcall(function()
-	if not pcall(function() readfile(NameHub) end) then
-		writefile(NameHub, game:service'HttpService':JSONEncode(themes)
-	end
-	themes = game:service'HttpService':JSONEncode(readfile(NameHub))
-end)]]
+if syn and makefolder then
+	pcall(function()
+		if not pcall(function() readfile("LanezHub/Color3.JSON") end) then
+			writefile("LanezHub/Color3.JSON", game:service'HttpService':JSONEncode(themes))
+		end
+		themes = game:service'HttpService':JSONEncode(readfile("LanezHub/Color3.JSON"))
+	end)
+end
 
 do
 	function utility:Create(instance, properties, children)
