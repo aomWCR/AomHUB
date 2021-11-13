@@ -24,12 +24,16 @@ local themes = {
 }
 
 if syn and makefolder then
-	pcall(function()
-		if not pcall(function() readfile("LanezHub/Color3.JSON") end) then
-			writefile("LanezHub/Color3.JSON", game:service'HttpService':JSONEncode(themes))
-		end
+	if isfile("LanezHub/Color3.JSON") then
 		themes = game:service'HttpService':JSONEncode(readfile("LanezHub/Color3.JSON"))
-	end)
+	else
+		pcall(function()
+			if not pcall(function() readfile("LanezHub/Color3.JSON") end) then
+				writefile("LanezHub/Color3.JSON", game:service'HttpService':JSONEncode(themes))
+			end
+			themes = game:service'HttpService':JSONEncode(readfile("LanezHub/Color3.JSON"))
+		end)
+	end
 end
 
 do
