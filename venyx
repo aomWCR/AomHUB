@@ -712,7 +712,7 @@ do
 		})
 
 		table.insert(self.modules, button)
-		--self:Resize()
+		self:Resize()
 
 		local text = button.Title
 		local debounce
@@ -799,7 +799,7 @@ do
 		})
 
 		table.insert(self.modules, toggle)
-		--self:Resize()
+		self:Resize()
 
 		local active = default
 		self:updateToggle(toggle, nil, active)
@@ -872,7 +872,7 @@ do
 		})
 
 		table.insert(self.modules, textbox)
-		--self:Resize()
+		self:Resize()
 
 		local button = textbox.Button
 		local input = button.Textbox
@@ -1015,7 +1015,7 @@ do
 		})
 
 		table.insert(self.modules, keybind)
-		--self:Resize()
+		self:Resize()
 
 		local text = keybind.Button.Text
 		local button = keybind.Button
@@ -1372,7 +1372,7 @@ do
 
 		utility:DraggingEnabled(tab)
 		table.insert(self.modules, colorpicker)
-		--self:Resize()
+		self:Resize()
 
 		local allowed = {
 			[""] = true
@@ -1678,7 +1678,7 @@ do
 		})
 
 		table.insert(self.modules, slider)
-		--self:Resize()
+		self:Resize()
 
 		local allowed = {
 			[""] = true,
@@ -1825,7 +1825,7 @@ do
 		})
 
 		table.insert(self.modules, dropdown)
-		--self:Resize()
+		self:Resize()
 
 		local search = dropdown.Search
 		local focused
