@@ -915,7 +915,7 @@ do
 
 	function section:addTextLabel(title)
 		local textlabel = utility:Create("ImageLabel", {
-			Name = "Textbox",
+			Name = "ImageLabel",
 			Parent = self.container,
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
@@ -927,7 +927,7 @@ do
 			SliceCenter = Rect.new(2, 2, 298, 298)
 		}, {
 			utility:Create("TextLabel", {
-				Name = "Title",
+				Name = "TextLabel",
 				AnchorPoint = Vector2.new(0, 0.5),
 				BackgroundTransparency = 1,
 				Position = UDim2.new(0, 10, 0.5, 1),
