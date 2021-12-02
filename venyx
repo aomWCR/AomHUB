@@ -12,10 +12,6 @@ local tweeninfo = TweenInfo.new
 -- additional
 local utility = {}
 local NameHub = "LanezHub.JSON"
-getgenv().Load = {
-	use = game.Players.LocalPlayer.Name,
-	key = "AddKey"
-}
 -- themes
 local objects = {}
 local themes = {
@@ -29,22 +25,9 @@ local themes = {
 
 if syn and makefolder then
 	if isfolder("LanezHub") then
-		if syn and writefile then
-			if isfile('LanezHub/Load.Key') then
-				getgenv().Load = game:service'HttpService':JSONEncode(readfile("LanezHub/Load.Key"))
-			else
-				writefile("LanezHub/Load.Key", game:service'HttpService':JSONEncode(getgenv().Load))
-			end
-		end
+
 	else
 		makefolder("LanezHub")
-		if syn and writefile then
-			if isfile('LanezHub/Load.Key') then
-				getgenv().Load = game:service'HttpService':JSONEncode(readfile("LanezHub/Load.Key"))
-			else
-				writefile("LanezHub/Load.Key", game:service'HttpService':JSONEncode(getgenv().Load))
-			end
-		end
 	end
 end
 
