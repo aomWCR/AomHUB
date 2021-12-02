@@ -31,6 +31,14 @@ if syn and makefolder then
 	end
 end
 
+if syn and makefolder then
+	if isfolder("LanezHub//Music") then
+
+	else
+		makefolder("LanezHub//Music")
+	end
+end
+
 do
 	function utility:Create(instance, properties, children)
 		local object = Instance.new(instance)
