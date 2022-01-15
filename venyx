@@ -12,6 +12,13 @@ local tweeninfo = TweenInfo.new
 -- additional
 local utility = {}
 local NameHub = "LanezHub.JSON"
+local api = {
+	["Settings"] = {["GUIObject"] = {["Type"] = "Custom", ["GUIKeybind"] = "RightShift", ["Color"] = 0.44}, ["SearchObject"] = {["Type"] = "Custom", ["List"] = {}}},
+	["FriendsObject"] = {["Color"] = 0.44, ["Friends"] = {}, ["MiddleClickFriends"] = false, ["MiddleClickFunc"] = function(plr) end},
+	["ToggleNotifications"] = false,
+	["ToggleTooltips"] = false,
+	["ObjectsThatCanBeSaved"] = {},
+}
 -- themes
 local objects = {}
 local themes = {
@@ -22,6 +29,31 @@ local themes = {
 	DarkContrast = Color3.fromRGB(14, 14, 14),  
 	TextColor = Color3.fromRGB(255, 255, 255)
 }
+
+function nubset(set)
+	if math.random(unpack(set)) == 1 then
+		return math.random(0,9)
+	else
+		return string.char(math.random(65,90))
+	end
+end
+
+function RandomKey(length)
+	local STR = ''
+	local SHOW = ""
+	for i = 1, length do
+		STR = STR .. nubset({1,2})
+	end
+	for i = 1,string.len(STR),1 do
+		local STRING = string.sub(STR,i,i)
+		if math.random(1,2) == 1 then
+			SHOW = SHOW..string.lower(STRING)
+		else
+			SHOW = SHOW..STRING
+		end
+	end
+	return SHOW
+end
 
 if syn and makefolder then
 	if isfolder("LanezHub") then
@@ -308,7 +340,24 @@ do
 				})
 			})
 		})
-
+		
+		if not is_sirhurt_closure and syn and syn.protect_gui then
+			local gui = container
+			gui.Name = RandomKey(math.random(16, 24))
+			gui.DisplayOrder = 999
+			syn.protect_gui(gui)
+			gui.Parent = game:GetService("CoreGui")
+			api["MainGui"] = gui
+		elseif gethui then
+			local gui = container
+			gui.Name = RandomKey(math.random(16, 24))
+			gui.DisplayOrder = 999
+			gui.Parent = gethui()
+			api["MainGui"] = gui
+		elseif game:GetService("CoreGui"):FindFirstChild('RobloxGui') then
+			api["MainGui"] = game:GetService("CoreGui").RobloxGui
+		end
+		
 		utility:InitializeKeybind()
 		utility:DraggingEnabled(container.Main.TopBar, container.Main)
 
