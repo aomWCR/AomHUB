@@ -336,11 +336,24 @@ do
 						TextColor3 = themes.TextColor,
 						TextSize = 14,
 						TextXAlignment = Enum.TextXAlignment.Left
+					}),
+					utility:Create("TextLabel", { -- title
+						Name = "Title",
+						AnchorPoint = Vector2.new(0, 0.5),
+						BackgroundTransparency = 1,
+						Position = UDim2.new(0, 12, 0, 19),
+						Size = UDim2.new(1, -46, 0, 16),
+						ZIndex = 5,
+						Font = Enum.Font.GothamBold,
+						Text = "Test",
+						TextColor3 = themes.TextColor,
+						TextSize = 14,
+						TextXAlignment = Enum.TextXAlignment.Left
 					})
 				})
 			})
 		})
-		
+
 		if not is_sirhurt_closure and syn and syn.protect_gui then
 			local gui = container
 			gui.Name = RandomKey(math.random(16, 24))
@@ -357,7 +370,7 @@ do
 		elseif game:GetService("CoreGui"):FindFirstChild('RobloxGui') then
 			api["MainGui"] = game:GetService("CoreGui").RobloxGui
 		end
-		
+
 		utility:InitializeKeybind()
 		utility:DraggingEnabled(container.Main.TopBar, container.Main)
 
