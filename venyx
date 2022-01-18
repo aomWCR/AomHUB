@@ -537,7 +537,7 @@ do
 			return
 		end
 
-		self.toggling = true Blur.Enabled = true
+		self.toggling = true
 
 		local container = self.container.Main
 		local topbar = container.TopBar
@@ -554,7 +554,9 @@ do
 
 			container.ClipsDescendants = false
 			self.position = nil
+			Blur.Enabled = false
 		else
+			Blur.Enabled = true
 			self.position = container.Position
 			container.ClipsDescendants = true
 
@@ -568,7 +570,7 @@ do
 			wait(0.2)
 		end
 
-		self.toggling = false Blur.Enabled = false
+		self.toggling = false
 	end
 
 	-- new modules
