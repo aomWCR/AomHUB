@@ -9,6 +9,9 @@ local input = game:GetService("UserInputService")
 local run = game:GetService("RunService")
 local tween = game:GetService("TweenService")
 local tweeninfo = TweenInfo.new
+local Blur = Instance.new("BlurEffect")
+Blur.Size = 24
+Blur.Enabled = false
 -- additional
 local utility = {}
 local NameHub = "LanezHub.JSON"
@@ -543,7 +546,7 @@ do
 			return
 		end
 
-		self.toggling = true
+		self.toggling = true Blur.Enabled = true
 
 		local container = self.container.Main
 		local topbar = container.TopBar
@@ -574,7 +577,7 @@ do
 			wait(0.2)
 		end
 
-		self.toggling = false
+		self.toggling = false Blur.Enabled = false
 	end
 
 	-- new modules
