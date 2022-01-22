@@ -9,9 +9,6 @@ local input = game:GetService("UserInputService")
 local run = game:GetService("RunService")
 local tween = game:GetService("TweenService")
 local tweeninfo = TweenInfo.new
-local Blur = Instance.new("BlurEffect",game.Lighting)
-Blur.Size = 24
-Blur.Enabled = true
 -- additional
 local utility = {}
 local NameHub = "LanezHub.JSON"
@@ -327,11 +324,6 @@ do
 					ScaleType = Enum.ScaleType.Slice,
 					SliceCenter = Rect.new(4, 4, 296, 296)
 				}, {
-					utility:Create("UIListLayout", {
-						VerticalAlignment = Enum.VerticalAlignment.Center,
-						SortOrder = Enum.SortOrder.LayoutOrder,
-						Padding = UDim.new(0, 10)
-					}),
 					utility:Create("TextLabel", { -- title
 						Name = "Title",
 						AnchorPoint = Vector2.new(0, 0.5),
@@ -554,9 +546,7 @@ do
 
 			container.ClipsDescendants = false
 			self.position = nil
-			Blur.Enabled = false
 		else
-			Blur.Enabled = true
 			self.position = container.Position
 			container.ClipsDescendants = true
 
